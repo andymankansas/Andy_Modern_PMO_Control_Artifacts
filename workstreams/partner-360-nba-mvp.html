@@ -1,0 +1,378 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Partner 360 — NBA / Personalization MVP · Workstream</title>
+<script>document.documentElement.setAttribute('data-theme',(function(){try{return localStorage.getItem('pmo-theme')||'dark';}catch(e){return 'dark';}})());</script>
+<style>
+:root{
+  --bg:#0d1117; --panel:#151b24; --panel2:#1b232e; --line:#26303c;
+  --txt:#e6edf3; --muted:#8b98a5; --accent:#7aa2f7;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 600px at 20% -10%,#182234,transparent),var(--bg);
+  color:var(--txt);font:14px/1.5 "Segoe UI",system-ui,Arial,sans-serif;padding-bottom:80px}
+a{color:var(--accent);text-decoration:none}
+.wrap{max-width:1360px;margin:0 auto;padding:22px}
+header.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding:18px 22px;border-bottom:1px solid var(--line);background:rgba(21,27,36,.7);backdrop-filter:blur(6px);
+  position:sticky;top:0;z-index:40}
+.brand{display:flex;align-items:center;gap:12px}
+.brand h1{font-size:18px;margin:0;letter-spacing:.3px}
+.brand .sub{color:var(--muted);font-size:12px}
+.logo{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#7aa2f7,#30a46c);
+  display:grid;place-items:center;font-weight:800;color:#0d1117}
+.meta{color:var(--muted);font-size:12px;text-align:right}
+.pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid var(--line)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:middle;margin-right:5px}
+.section-title{margin:26px 4px 12px;font-size:13px;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted)}
+.grid{display:grid;gap:14px}
+.kpis{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.cards{grid-template-columns:repeat(auto-fill,minmax(310px,1fr))}
+.cols-2{grid-template-columns:1fr 1fr}
+@media(max-width:900px){.cols-2{grid-template-columns:1fr}}
+.card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);
+  border-radius:14px;padding:16px;transition:.15s}
+.card.clk{cursor:pointer}
+.card.clk:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 26px rgba(0,0,0,.35)}
+.kpi .k-top{display:flex;align-items:center;justify-content:space-between}
+.kpi .k-label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+.kpi .k-val{font-size:30px;font-weight:800;margin-top:6px}
+.kpi .k-sub{color:var(--muted);font-size:12px;margin-top:2px}
+.ws-card .wc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.ws-card h3{margin:0;font-size:15px;line-height:1.3}
+.ws-card .role{color:var(--muted);font-size:12px;margin-top:2px}
+.ws-card .wc-body{display:flex;align-items:center;gap:14px;margin-top:12px}
+.ws-card .metrics{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:6px 10px}
+.mini{font-size:12px}.mini b{font-size:14px}
+.muted{color:var(--muted)}
+.tag{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+.bar-row{display:grid;grid-template-columns:150px 1fr 32px;align-items:center;gap:10px;margin:7px 0}
+.bar-label{font-size:12px}.bar-sub{color:var(--muted)}
+.bar-track{height:8px;background:rgba(255,255,255,.07);border-radius:6px;overflow:hidden}
+.bar-fill{height:100%;border-radius:6px}
+.bar-val{font-size:12px;color:var(--muted);text-align:right}
+.gauge-t{font-size:15px;font-weight:800}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.state{font-weight:800;border-radius:5px;padding:1px 7px;font-size:11px}
+.state.C{background:rgba(48,163,108,.16);color:#4bd08b}
+.state.E{background:rgba(245,165,36,.16);color:#f5b74e}
+.state.TBC{background:rgba(229,72,77,.16);color:#ff7b7f}
+.flag{color:#ff7b7f;font-weight:700}
+.stage-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:8px}
+.stage-cell{border:1px solid var(--line);border-radius:8px;padding:8px;font-size:11px;min-height:58px}
+.stage-cell .sc-name{font-weight:600;margin-bottom:6px;line-height:1.2}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:8px}
+/* left->right process flow (E2E Control Tower pipeline) */
+.flow{display:flex;gap:0;overflow-x:auto;padding-bottom:8px;margin-top:10px}
+.flow-col{min-width:158px;flex:1 0 158px;display:flex;flex-direction:column}
+.flow-head{color:#fff;border-radius:9px 9px 0 0;padding:9px 10px;font-weight:700;font-size:12px;text-align:center;line-height:1.25}
+.flow-head .flow-sub{font-size:10px;font-weight:600;opacity:.85;display:block;margin-top:1px}
+.flow-cell{border:1px solid var(--line);border-top:none;padding:8px 10px;font-size:11px;display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--panel)}
+.flow-cell:last-child{border-radius:0 0 9px 9px}
+.flow-name{line-height:1.2}
+.flow-meta{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.flow-tgt{font-size:10px;color:var(--muted)}
+.flow-arrow{align-self:flex-start;color:var(--muted);font-size:18px;padding:9px 3px 0;flex:0 0 auto}
+/* modal */
+.modal-bg{position:fixed;inset:0;background:rgba(4,7,11,.72);display:none;z-index:100;padding:34px}
+.modal-bg.open{display:block}
+.modal{max-width:1000px;margin:0 auto;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;max-height:88vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.modal-h{position:sticky;top:0;background:var(--panel);border-bottom:1px solid var(--line);
+  padding:16px 20px;display:flex;justify-content:space-between;align-items:center;z-index:2}
+.modal-h h2{margin:0;font-size:17px}
+.modal-b{padding:18px 20px}
+.x{cursor:pointer;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:4px 10px}
+.x:hover{color:var(--txt);border-color:var(--accent)}
+/* chatbot */
+#chat-fab{position:fixed;right:22px;bottom:22px;z-index:120;background:linear-gradient(135deg,#7aa2f7,#30a46c);
+  color:#08111e;font-weight:700;border:none;border-radius:30px;padding:13px 20px;cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,0,0,.4)}
+#chat-panel{position:fixed;right:22px;bottom:78px;width:380px;max-width:92vw;height:520px;max-height:74vh;
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;display:none;flex-direction:column;
+  z-index:120;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+#chat-panel.open{display:flex}
+.chat-h{padding:13px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.chat-h b{font-size:14px}.chat-h .sub{color:var(--muted);font-size:11px}
+.chat-log{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.msg{padding:9px 12px;border-radius:12px;max-width:86%;font-size:13px;white-space:pre-wrap;line-height:1.45}
+.msg.bot{background:var(--panel2);border:1px solid var(--line);align-self:flex-start}
+.msg.me{background:rgba(122,162,247,.16);border:1px solid rgba(122,162,247,.4);align-self:flex-end}
+.chat-suggest{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 8px}
+.chip{font-size:11px;border:1px solid var(--line);border-radius:14px;padding:4px 9px;cursor:pointer;color:var(--muted)}
+.chip:hover{border-color:var(--accent);color:var(--txt)}
+.chat-in{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
+.chat-in input{flex:1;background:var(--bg);border:1px solid var(--line);border-radius:10px;
+  padding:9px 12px;color:var(--txt);font-size:13px}
+.chat-in button{background:var(--accent);color:#08111e;border:none;border-radius:10px;padding:0 14px;font-weight:700;cursor:pointer}
+.crumbs{color:var(--muted);font-size:12px;margin:2px 0 10px}
+.note{background:rgba(122,162,247,.08);border:1px solid rgba(122,162,247,.3);border-radius:10px;
+  padding:10px 12px;font-size:12px;color:var(--muted);margin:10px 0}
+ul.tight{margin:6px 0;padding-left:18px}ul.tight li{margin:2px 0}
+.chatline{font-size:11px}
+/* theme toggle */
+#theme-toggle{position:fixed;left:22px;bottom:22px;z-index:120;background:var(--panel);color:var(--txt);
+  border:1px solid var(--line);border-radius:30px;padding:11px 16px;cursor:pointer;font-size:13px;font-weight:600;
+  box-shadow:0 8px 24px rgba(0,0,0,.3)}
+#theme-toggle:hover{border-color:var(--accent)}
+/* ---------------- Light theme ---------------- */
+:root[data-theme="light"]{
+  --bg:#eef1f6; --panel:#ffffff; --panel2:#f2f5fa; --line:#d7dee8;
+  --txt:#1b2430; --muted:#5c6875; --accent:#3457c5;
+}
+[data-theme="light"] body{background:radial-gradient(1200px 600px at 20% -10%,#dde6f5,transparent),var(--bg)}
+[data-theme="light"] header.topbar{background:rgba(255,255,255,.82)}
+[data-theme="light"] .logo{color:#fff}
+[data-theme="light"] .bar-track{background:rgba(0,0,0,.08)}
+[data-theme="light"] .gauge-bg{stroke:rgba(0,0,0,.10)}
+[data-theme="light"] .card{box-shadow:0 1px 3px rgba(16,24,40,.06)}
+[data-theme="light"] .card.clk:hover{box-shadow:0 10px 26px rgba(16,24,40,.14)}
+[data-theme="light"] .flag{color:#c0322f}
+[data-theme="light"] .state.C{color:#137a45}
+[data-theme="light"] .state.E{color:#946200}
+[data-theme="light"] .state.TBC{color:#c0322f}
+[data-theme="light"] .modal-bg{background:rgba(20,28,40,.45)}
+[data-theme="light"] .msg.bot{background:#f2f5fa}
+/* ---------------- Reply brand theme ---------------- */
+:root[data-theme="reply"]{
+  --bg:#f3f7fc; --panel:#ffffff; --panel2:#edf3fb; --line:#d2ddea;
+  --txt:#052b57; --muted:#5a6b80; --accent:#0055b8;
+}
+[data-theme="reply"] body{background:radial-gradient(1200px 600px at 18% -10%,#e2ecfa,transparent),var(--bg)}
+[data-theme="reply"] header.topbar{background:rgba(255,255,255,.9);border-bottom:2px solid #0055b8}
+[data-theme="reply"] .bar-track{background:rgba(5,43,87,.10)}
+[data-theme="reply"] .gauge-bg{stroke:rgba(5,43,87,.12)}
+[data-theme="reply"] .card{box-shadow:0 1px 3px rgba(5,43,87,.08)}
+[data-theme="reply"] .card.clk:hover{box-shadow:0 10px 26px rgba(5,43,87,.16)}
+[data-theme="reply"] .flag{color:#da2c43}
+[data-theme="reply"] .state.C{color:#057248}
+[data-theme="reply"] .state.E{color:#946200}
+[data-theme="reply"] .state.TBC{color:#c0322f}
+[data-theme="reply"] .modal-bg{background:rgba(5,43,87,.45)}
+[data-theme="reply"] .msg.bot{background:#edf3fb}
+[data-theme="reply"] #chat-fab{background:linear-gradient(135deg,#0055b8,#00a9f4);color:#fff}
+[data-theme="reply"] .pill{background:rgba(0,85,184,.06)}
+[data-theme="reply"] .section-title{color:#0055b8}
+/* ---------------- Brand logo (Reply) ---------------- */
+.brandmark{width:38px;height:38px;display:inline-grid;place-items:center}
+.brandmark .bm{width:38px;height:38px;display:none}
+.brandby{display:flex;align-items:center;gap:6px;justify-content:flex-end;margin-top:7px}
+.wordmark{display:inline-flex;align-items:center}
+.wordmark .wm{height:19px;width:auto;display:none}
+[data-theme="dark"] .bm-dark{display:block}
+[data-theme="light"] .bm-color,[data-theme="reply"] .bm-color{display:block}
+[data-theme="dark"] .wm-dark{display:block}
+[data-theme="light"] .wm-light{display:block}
+[data-theme="reply"] .wm-reply{display:block}
+</style></head><body>
+<header class="topbar">
+      <div class="brand"><span class="brandmark"><img class="bm bm-dark" src="../assets/reply_rm_white.svg" alt="Reply"><img class="bm bm-color" src="../assets/reply_rm_rgb.svg" alt="Reply"></span>
+        <div><h1>Partner 360 — NBA / Personalization MVP</h1>
+          <div class="sub">Workstream Agent Dashboard · Data Lead · Sponsor Laird Coleman · Reply · P2</div></div>
+      </div>
+      <div class="meta"><span class="dot" style="background:#f5a524"></span><b>Amber</b> · ▲ Red→Amber<br>Generated Jul 22, 2026<div class="brandby"><span class="muted" style="font-size:10px;letter-spacing:.6px">DELIVERED BY</span><span class="wordmark"><img class="wm wm-dark" src="../assets/reply_logo_white.svg" alt="Reply"><img class="wm wm-light" src="../assets/reply_logo_black.svg" alt="Reply"><img class="wm wm-reply" src="../assets/reply_logo_rgb.svg" alt="Reply"></span></div></div>
+    </header><div class='wrap'><div class="crumbs"><a href="../index.html">← Control Tower</a> / Partner 360 — NBA MVP</div>
+      <div class="card"><div class="wc-head"><h3>Health & Exec Asks</h3><svg width="80" height="80" viewBox="0 0 66 66" class="gauge">
+      <circle class="gauge-bg" cx="33" cy="33" r="26" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="7"/>
+      <circle cx="33" cy="33" r="26" fill="none" stroke="#f5a524" stroke-width="7"
+        stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="69.1"
+        transform="rotate(-90 33 33)"/>
+      <text x="33" y="38" text-anchor="middle" class="gauge-t" fill="#f5a524">58</text>
+    </svg></div>
+        <div class="role" style="margin-top:6px">Top risk: <b style="color:var(--txt)">Environment contention</b></div>
+        <div class="section-title" style="margin:10px 0 4px">Exec asks this period</div><ul class="tight"><li>Approve NBA scope V2</li><li>Platform: Adobe vs Sitecore</li></ul>
+        <div class="mini muted" style="margin-top:6px">Interdependent: <b>Yes</b> · Data hygiene <b>78%</b> (stale 7, missing owners 3, orphans 2)</div>
+      </div>
+      <div class="card"><div class="wc-head"><h3>Delivery Pipeline — E2E Control Tower (Lens 3)</h3><span class="tag">20 stages · C / E / TBC</span></div><div class="flow"><div class="flow-col"><div class="flow-head" style="background:#22497f">Discovery &amp; Definition</div><div class="flow-cell" style="border-left:3px solid #22497f"><span class="flow-name">Intake / PBON #</span><span class="flow-meta"><span class="flow-tgt">2026-09-03</span><span class="state C">C</span></span></div><div class="flow-cell" style="border-left:3px solid #22497f"><span class="flow-name">BRD</span><span class="flow-meta"><span class="flow-tgt">2026-07-01</span><span class="state C">C</span></span></div><div class="flow-cell" style="border-left:3px solid #22497f"><span class="flow-name">Project Def</span><span class="flow-meta"><span class="flow-tgt">2026-08-17</span><span class="state C">C</span></span></div><div class="flow-cell" style="border-left:3px solid #22497f"><span class="flow-name">UX Flow</span><span class="flow-meta"><span class="flow-tgt">2026-08-15</span><span class="state C">C</span></span></div><div class="flow-cell" style="border-left:3px solid #22497f"><span class="flow-name">Lowfi</span><span class="flow-meta"><span class="flow-tgt">2026-07-03</span><span class="state C">C</span></span></div><div class="flow-cell" style="border-left:3px solid #22497f"><span class="flow-name">Prototype</span><span class="flow-meta"><span class="flow-tgt">2026-09-11</span><span class="state C">C</span></span></div><div class="flow-cell" style="border-left:3px solid #22497f"><span class="flow-name">Demo Video</span><span class="flow-meta"><span class="flow-tgt">2026-09-29</span><span class="state C">C</span></span></div></div><div class="flow-arrow">→</div><div class="flow-col"><div class="flow-head" style="background:#2f7d5c">Website Design &amp; Eng<span class="flow-sub">JS / Accenture</span></div><div class="flow-cell" style="border-left:3px solid #2f7d5c"><span class="flow-name">Web Intake</span><span class="flow-meta"><span class="flow-tgt">2026-07-05</span><span class="state C">C</span></span></div><div class="flow-cell" style="border-left:3px solid #2f7d5c"><span class="flow-name">Web Intake Review</span><span class="flow-meta"><span class="flow-tgt">2026-06-24</span><span class="state C">C</span></span></div><div class="flow-cell" style="border-left:3px solid #2f7d5c"><span class="flow-name">Web Design &amp; Copy</span><span class="flow-meta"><span class="flow-tgt">2026-08-08</span><span class="state C">C</span></span></div><div class="flow-cell" style="border-left:3px solid #2f7d5c"><span class="flow-name">Web Eng</span><span class="flow-meta"><span class="flow-tgt">2026-07-29</span><span class="state C">C</span></span></div><div class="flow-cell" style="border-left:3px solid #2f7d5c"><span class="flow-name">Component Eng</span><span class="flow-meta"><span class="flow-tgt">2026-09-12</span><span class="state C">C</span></span></div><div class="flow-cell" style="border-left:3px solid #2f7d5c"><span class="flow-name">Web Go-Live</span><span class="flow-meta"><span class="flow-tgt">2026-07-19</span><span class="state E">E</span></span></div></div><div class="flow-arrow">→</div><div class="flow-col"><div class="flow-head" style="background:#7b4a28">Partner Center Design &amp; Eng</div><div class="flow-cell" style="border-left:3px solid #7b4a28"><span class="flow-name">PC Intake</span><span class="flow-meta"><span class="flow-tgt">2026-09-03</span><span class="state E">E</span></span></div><div class="flow-cell" style="border-left:3px solid #7b4a28"><span class="flow-name">PC Commit Date</span><span class="flow-meta"><span class="flow-tgt">2026-06-27</span><span class="state E">E</span></span></div><div class="flow-cell" style="border-left:3px solid #7b4a28"><span class="flow-name">PC Design</span><span class="flow-meta"><span class="flow-tgt">2026-09-13</span><span class="state TBC">TBC</span></span></div><div class="flow-cell" style="border-left:3px solid #7b4a28"><span class="flow-name">PC Eng Dev</span><span class="flow-meta"><span class="flow-tgt">2026-08-14</span><span class="state TBC">TBC</span></span></div><div class="flow-cell" style="border-left:3px solid #7b4a28"><span class="flow-name">PC Go-Live</span><span class="flow-meta"><span class="flow-tgt">2026-08-19</span><span class="state TBC">TBC</span></span></div></div><div class="flow-arrow">→</div><div class="flow-col"><div class="flow-head" style="background:#7a2e5d">Delivery</div><div class="flow-cell" style="border-left:3px solid #7a2e5d"><span class="flow-name">Business Delivery Date</span><span class="flow-meta"><span class="flow-tgt">2026-07-21</span><span class="state TBC">TBC</span></span></div></div><div class="flow-arrow">→</div><div class="flow-col"><div class="flow-head" style="background:#5b6472">Operational</div><div class="flow-cell" style="border-left:3px solid #5b6472"><span class="flow-name">Next Handoff Owed</span><span class="flow-meta"><span class="flow-tgt">2026-07-12</span><span class="state TBC">TBC</span></span></div></div></div><div class="legend"><span><b>Commitment state:</b></span><span><span class="state C">C</span> Committed — hard date, owner signed up</span><span><span class="state E">E</span> Estimate — owner&#x27;s best guess</span><span><span class="state TBC">TBC</span> To Be Confirmed — handoff overdue</span></div><div class="note"><b>Integrity rule:</b> If Delivery = C but an upstream stage isn&#x27;t also C, the record is flagged — Delivery can&#x27;t be a hard date while earlier stages are still estimates or unconfirmed. <span class="flag">⚠</span></div></div><div class="section-title">Signals</div>
+      <div class="grid cols-2">
+        <div class="card"><div class="wc-head"><h3>① Schedule &amp; Delivery Health</h3><span class="tag">3 moved</span></div><div class="grid cols-2" style="margin-top:6px">
+      <div><div class="bar-row">
+      <div class="bar-label">Velocity (cur vs avg) <span class="bar-sub">18/26</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:48%;background:#f5a524"></div></div>
+      <div class="bar-val">48</div>
+    </div>
+        <div class="mini muted" style="margin-top:6px">Velocity trend <svg width="120" height="30" class="spark"><polyline points="0.0,11.3 24.0,2.0 48.0,16.9 72.0,28.0 96.0,5.7 120.0,20.6" fill="none" stroke="#7aa2f7" stroke-width="2"/></svg></div>
+        <div class="mini muted">Cycle time <b>3.2d</b> · Lead time <b>8.3d</b></div>
+        <div class="mini muted">Critical-path drift <b class="flag">15d</b></div>
+        <div class="mini muted">Open <b>42</b> · Past due <b>5</b> · Avg age <b>32d</b></div>
+      </div>
+      <div><table><thead><tr><th>Milestone</th><th>Planned</th><th>Actual</th><th>Slip</th></tr></thead><tbody><tr><td>Discovery sign-off</td><td>2026-08-25</td><td>2026-08-25</td><td>on time</td></tr><tr><td>Design freeze</td><td>2026-07-06</td><td>2026-07-12</td><td><span class=flag>6d</span></td></tr><tr><td>Eng complete</td><td>2026-07-28</td><td>2026-07-28</td><td>on time</td></tr><tr><td>Test exit</td><td>2026-09-12</td><td>2026-09-12</td><td>on time</td></tr><tr><td>UAT sign-off</td><td>2026-08-22</td><td>2026-08-26</td><td><span class=flag>4d</span></td></tr><tr><td>Go-live</td><td>2026-09-11</td><td>2026-09-26</td><td><span class=flag>15d</span></td></tr></tbody></table></div>
+    </div></div>
+        <div class="card"><div class="wc-head"><h3>③ Risk, Issues &amp; Blockers (RAID)</h3><span class="tag">0 high</span></div><table><thead><tr><th>ID</th><th>Risk</th><th>Sev</th><th>Owner</th><th>Trend</th></tr></thead><tbody><tr><td>R-0601</td><td>Environment contention</td><td><span class="state E">Medium</span></td><td>Marcus Bell</td><td>steady</td></tr><tr><td>R-0602</td><td>Consent/compliance gate open</td><td><span class="state E">Medium</span></td><td>Owen Frost</td><td>steady</td></tr><tr><td>R-0603</td><td>Data model not finalized</td><td><span class="state E">Medium</span></td><td>Raj Malhotra</td><td>worsening</td></tr><tr><td>R-0604</td><td>Scope creep on personalization</td><td><span class="state E">Medium</span></td><td>Elena Petrova</td><td>improving</td></tr></tbody></table>
+      <div class="grid cols-2" style="margin-top:8px">
+        <div><div class="section-title" style="margin:8px 0 4px">Blockers (age)</div><ul class="tight"><li><b>Waiting on canonical ID</b> — 17d, waiting on Priya Raman</li><li><b>Pending legal sign-off</b> — 9d, waiting on Priya Raman</li><li><b>Upstream API not ready</b> — 7d, waiting on Nersa Patel</li></ul></div>
+        <div><div class="section-title" style="margin:8px 0 4px">Overdue actions</div><ul class="tight"><li>Rebaseline plan — Chris Okafor (due 2026-07-20)</li><li>Rebaseline plan — Bianca Lopez (due 2026-07-21)</li></ul>
+          <div class="section-title" style="margin:8px 0 4px">Decisions pending</div><ul class="tight"><li>Approve NBA scope V2 — waiting 12d (Business Sponsor)</li><li>Platform: Adobe vs Sitecore — waiting 4d (MOSA)</li><li>Confirm go-live date — waiting 8d (Darren Yetzer)</li></ul></div>
+      </div>
+      <div class="mini muted" style="margin-top:6px">Defects: 37 open (2 high-sev, trend flat)</div></div>
+      </div>
+      <div class="grid cols-2">
+        <div class="card"><div class="wc-head"><h3>② Scope &amp; Change</h3><span class="tag">17% change</span></div><div class="bar-row">
+      <div class="bar-label">Scope change rate <span class="bar-sub">+17/-4 vs 124</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:17%;background:#e5484d"></div></div>
+      <div class="bar-val">17</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Unplanned work <span class="bar-sub"></span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:18%;background:#e5484d"></div></div>
+      <div class="bar-val">18</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Requirement churn <span class="bar-sub"></span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:22%;background:#e5484d"></div></div>
+      <div class="bar-val">22</div>
+    </div></div>
+        <div class="card"><div class="wc-head"><h3>④ Dependencies (cross-team)</h3><span class="tag">0 breach</span></div><table><thead><tr><th>Direction</th><th>Workstream</th><th>Link</th><th>Status</th></tr></thead><tbody><tr><td>depends on →</td><td>Partner 360 — Data &amp; BI</td><td>NBA MVP consumes BI feature store</td><td style="color:#30a46c;font-weight:700">on-track</td></tr><tr><td>← blocks</td><td>CSS — NBA for Support</td><td>Reuses NBA scoring service</td><td style="color:#30a46c;font-weight:700">on-track</td></tr></tbody></table>
+      <div class="section-title" style="margin:8px 0 4px">Shared-resource contention</div><ul class="tight"><li>None flagged</li></ul></div>
+      </div>
+      <div class="grid cols-2">
+        <div class="card"><div class="wc-head"><h3>⑤ Resource &amp; Capacity</h3><span class="tag">89% util</span></div><div class="bar-row">
+      <div class="bar-label">Utilization <span class="bar-sub">359/405h</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:89%;background:#30a46c"></div></div>
+      <div class="bar-val">89</div>
+    </div>
+      <div class="grid cols-2" style="margin-top:6px">
+        <div><div class="section-title" style="margin:6px 0 4px">Over-allocated</div><ul class="tight"><li>Laird Coleman — 120%</li></ul></div>
+        <div><div class="section-title" style="margin:6px 0 4px">Onboarding / ramp</div><ul class="tight"><li>None onboarding</li></ul></div>
+      </div>
+      <div class="mini muted">Bus-factor / concentration risk — critical owner <b>Owen Frost</b>; SPOFs: Chris Okafor, Elena Petrova</div></div>
+        <div class="card"><div class="wc-head"><h3>⑥ Financials</h3><span class="tag">75% burn</span></div><div class="bar-row">
+      <div class="bar-label">Budget burn <span class="bar-sub">$241k of $320k</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:75%;background:#30a46c"></div></div>
+      <div class="bar-val">75</div>
+    </div>
+      <div class="mini muted">EAC <b>$336k</b> · ETC <b>$95k</b> · Variance <b style="color:#e5484d">$-11k</b> (-5%)</div>
+      <table style="margin-top:8px"><thead><tr><th>SOW milestone</th><th>Amount</th><th>Status</th></tr></thead><tbody><tr><td>SOW M1 — Discovery</td><td>$80k</td><td>Paid</td></tr><tr><td>SOW M2 — Design</td><td>$80k</td><td>Invoiced</td></tr><tr><td>SOW M3 — Build</td><td>$80k</td><td>On track</td></tr><tr><td>SOW M4 — Delivery</td><td>$80k</td><td>On track</td></tr></tbody></table></div>
+      </div>
+      <div class="grid cols-2">
+        <div class="card"><div class="wc-head"><h3>⑦ Quality &amp; Compliance</h3><span class="tag">88% pass</span></div><div class="bar-row">
+      <div class="bar-label">Test coverage <span class="bar-sub"></span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:58%;background:#f5a524"></div></div>
+      <div class="bar-val">58</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Pass rate <span class="bar-sub"></span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:88%;background:#30a46c"></div></div>
+      <div class="bar-val">88</div>
+    </div><div class="bar-row">
+      <div class="bar-label">DoD adherence <span class="bar-sub"></span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:82%;background:#30a46c"></div></div>
+      <div class="bar-val">82</div>
+    </div>
+      <div class="mini muted">Escaped defects: <b class="flag">4</b></div>
+      <table style="margin-top:8px"><thead><tr><th>Compliance gate</th><th>Status</th></tr></thead><tbody><tr><td>Security review</td><td>Passed</td></tr><tr><td>Accessibility (a11y)</td><td>In progress</td></tr><tr><td>Privacy / consent</td><td>Passed</td></tr><tr><td>Performance</td><td>Not started</td></tr><tr><td>Design sign-off</td><td>Passed</td></tr><tr><td>Go-live checklist</td><td>Passed</td></tr></tbody></table></div>
+        <div class="card"><div class="wc-head"><h3>⑧ Stakeholder &amp; Sentiment</h3><span class="tag">65 sentiment</span></div><div class="mini muted">Momentum <b style="color:var(--txt)">Red→Amber</b> — Slipping milestone and rising unplanned work; recoverable.</div>
+      <div class="bar-row">
+      <div class="bar-label">Sentiment <span class="bar-sub"></span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:65%;background:#f5a524"></div></div>
+      <div class="bar-val">65</div>
+    </div>
+      <div class="mini muted">Last update 2026-07-18 (on time), Weekly cadence</div>
+      <div class="section-title" style="margin:6px 0 4px">Overdue approvals / sign-offs</div><ul class="tight"><li>Budget line — Business Sponsor (5d overdue)</li><li>Design sign-off — Darren Yetzer (1d overdue)</li></ul>
+      <div class="section-title" style="margin:6px 0 4px">Sentiment from notes</div><ul class="tight"><li>Frustration over environment contention.</li><li>Positive feedback on demo.</li></ul></div>
+      </div>
+      <div class="grid cols-2">
+        <div class="card"><div class="wc-head"><h3>Meeting Load &amp; Cadence</h3><span class="tag">9h/wk</span></div><div class="mini muted">11 meetings · 9.3 hrs/week · <span class="flag">overloaded</span></div>
+      <table style="margin-top:8px"><thead><tr><th>Meeting</th><th>Cadence</th><th>Load</th></tr></thead><tbody><tr><td>Weekly status (Lens 1)</td><td>Weekly</td><td>0.5h</td></tr><tr><td>Delivery pipeline review (Lens 3)</td><td>Weekly</td><td>0.75h</td></tr><tr><td>Daily standup</td><td>Daily</td><td>0.25h</td></tr><tr><td>Vendor handoff</td><td>Ad-hoc</td><td>0.5h</td></tr><tr><td>Sponsor sync</td><td>Weekly</td><td>0.5h</td></tr></tbody></table></div>
+        <div></div>
+      </div></div>
+<button id="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+
+<button id="chat-fab" onclick="chatToggle()">💬 Ask the PMO</button>
+<div id="chat-panel">
+  <div class="chat-h"><div><b>PMO Copilot</b><div class="sub">Demo · answers from synthetic hub</div></div>
+    <span class="x" onclick="chatToggle()">✕</span></div>
+  <div class="chat-log" id="chat-log">
+    <div class="msg bot">Hi — I'm your Control Tower assistant. Ask me about health, risks, budgets, dependencies, decisions or any workstream.</div>
+  </div>
+  <div class="chat-suggest"><span class="chip" onclick="ask(this.textContent)">Partner 360 — NBA MVP risks</span><span class="chip" onclick="ask(this.textContent)">Budget</span><span class="chip" onclick="ask(this.textContent)">Dependencies</span><span class="chip" onclick="ask(this.textContent)">Schedule</span><span class="chip" onclick="ask(this.textContent)">Sentiment</span></div>
+  <div class="chat-in">
+    <input id="chat-input" placeholder="Ask a question..." onkeydown="if(event.key==='Enter')ask(this.value)">
+    <button onclick="ask(document.getElementById('chat-input').value)">Send</button>
+  </div>
+</div>
+
+
+<script>
+const MODALS = {};
+document.querySelectorAll('[data-modal]').forEach(el=>{
+  el.addEventListener('click',()=>openModal(el.getAttribute('data-modal')));
+});
+function openModal(id){
+  const m=document.getElementById('m-'+id); if(!m)return;
+  m.classList.add('open'); document.body.style.overflow='hidden';
+}
+function closeModal(el){el.closest('.modal-bg').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-bg.open').forEach(m=>{m.classList.remove('open');document.body.style.overflow='';});});
+document.querySelectorAll('.modal-bg').forEach(m=>m.addEventListener('click',e=>{if(e.target===m){m.classList.remove('open');document.body.style.overflow='';}}));
+
+/* ---------------- Theme toggle (persisted) --------------- */
+function applyThemeLabel(){const t=document.documentElement.getAttribute('data-theme')||'dark';const b=document.getElementById('theme-toggle');if(!b)return;const m={dark:'🌙 Dark',light:'☀️ Light',reply:'🔵 Reply'};b.textContent=m[t]||m.dark;}
+function toggleTheme(){const order=['dark','light','reply'];const cur=document.documentElement.getAttribute('data-theme')||'dark';const next=order[(order.indexOf(cur)+1)%order.length];document.documentElement.setAttribute('data-theme',next);try{localStorage.setItem('pmo-theme',next);}catch(e){}applyThemeLabel();}
+applyThemeLabel();
+
+/* ---------------- Canned AI chatbot (offline, answers from embedded data) --------------- */
+const PMO = {"portfolio": {"generated": "2026-07-22", "workstream_count": 13, "rag_counts": {"R": 2, "A": 6, "G": 5}, "avg_health": 62.7, "total_budget": 4420000, "total_spent": 2699804, "open_risks": 44, "high_risks": 8, "open_blockers": 19, "overdue_actions": 31, "decisions_pending": 5, "dependency_breaches": 1, "avg_data_hygiene": 83.8, "meetings_overloaded": 2, "data_sources": ["Azure DevOps", "Teams (seed word)", "Email (seed word)", "Meetings / Recordings", "PBoN (Partner Book of News)"]}, "workstreams": [{"id": "app-accelerate-csp", "name": "App Accelerate / CSP Migration \u2014 Web & Branding", "short": "App Accelerate / CSP", "rag": "A", "health": 63.9, "trend": "down", "sponsor": "Darren Yetzer", "top_risk": "Consent/compliance gate open", "exec_asks": ["Accept consent model"], "risks": 5, "high_risks": 0, "blockers": 2, "deps": 1, "breaches": 0, "milestones_moved": 2, "cp_drift": 8, "fin": {"budget": 180000, "spent": 143863, "burn": 79.9, "eac": 189000, "var": -6850}}, {"id": "benefits-purchase-redemption", "name": "Benefits Purchase & Redemption \u2014 SPD", "short": "Benefits Purchase & Redemption", "rag": "G", "health": 92.0, "trend": "flat", "sponsor": "Helene Ndolo", "top_risk": "Vendor handoff slipping", "exec_asks": ["Platform: Adobe vs Sitecore"], "risks": 1, "high_risks": 0, "blockers": 0, "deps": 1, "breaches": 0, "milestones_moved": 0, "cp_drift": 2, "fin": {"budget": 520000, "spent": 371933, "burn": 71.5, "eac": 488800, "var": 23740}}, {"id": "disti-activation-fad", "name": "Disti Activation \u2014 Find a Distributor", "short": "Disti Activation (FaD)", "rag": "R", "health": 25.9, "trend": "down", "sponsor": "Austin Reyes", "top_risk": "Environment contention", "exec_asks": ["Confirm go-live date", "Accept consent model"], "risks": 5, "high_risks": 3, "blockers": 2, "deps": 2, "breaches": 0, "milestones_moved": 6, "cp_drift": 9, "fin": {"budget": 180000, "spent": 166605, "burn": 92.6, "eac": 212400, "var": -25414}}, {"id": "modern-work", "name": "Modern Work", "short": "Modern Work", "rag": "G", "health": 85.6, "trend": "up", "sponsor": "Nersa Patel", "top_risk": "Integration dependency at risk", "exec_asks": ["No open asks this period."], "risks": 3, "high_risks": 0, "blockers": 1, "deps": 1, "breaches": 0, "milestones_moved": 1, "cp_drift": 0, "fin": {"budget": 240000, "spent": 96472, "burn": 40.2, "eac": 225600, "var": 6158}}, {"id": "partner-360-data-bi", "name": "Partner 360 \u2014 Data & BI Models V1", "short": "Partner 360 \u2014 Data & BI", "rag": "A", "health": 49.8, "trend": "flat", "sponsor": "Laird Coleman", "top_risk": "Vendor handoff slipping", "exec_asks": ["Platform: Adobe vs Sitecore"], "risks": 5, "high_risks": 2, "blockers": 1, "deps": 4, "breaches": 0, "milestones_moved": 6, "cp_drift": 13, "fin": {"budget": 410000, "spent": 210530, "burn": 51.3, "eac": 430500, "var": -10025}}, {"id": "partner-360-nba-mvp", "name": "Partner 360 \u2014 NBA / Personalization MVP", "short": "Partner 360 \u2014 NBA MVP", "rag": "A", "health": 57.7, "trend": "up", "sponsor": "Laird Coleman", "top_risk": "Environment contention", "exec_asks": ["Approve NBA scope V2", "Platform: Adobe vs Sitecore"], "risks": 4, "high_risks": 0, "blockers": 3, "deps": 2, "breaches": 0, "milestones_moved": 3, "cp_drift": 15, "fin": {"budget": 320000, "spent": 240603, "burn": 75.2, "eac": 336000, "var": -11457}}, {"id": "partner-desking", "name": "Partner Desking", "short": "Partner Desking", "rag": "G", "health": 85.7, "trend": "flat", "sponsor": "Dana Whitfield", "top_risk": "Scope creep on personalization", "exec_asks": ["No open asks this period."], "risks": 1, "high_risks": 0, "blockers": 0, "deps": 1, "breaches": 0, "milestones_moved": 0, "cp_drift": 2, "fin": {"budget": 180000, "spent": 112327, "burn": 62.4, "eac": 169200, "var": 7169}}, {"id": "css-nba-support", "name": "CSS \u2014 Next Best Action for Support", "short": "CSS \u2014 NBA for Support", "rag": "A", "health": 49.5, "trend": "down", "sponsor": "Dana Whitfield", "top_risk": "Environment contention", "exec_asks": ["Accept consent model", "Confirm go-live date"], "risks": 3, "high_risks": 0, "blockers": 2, "deps": 1, "breaches": 0, "milestones_moved": 1, "cp_drift": 5, "fin": {"budget": 320000, "spent": 239575, "burn": 74.9, "eac": 336000, "var": -11409}}, {"id": "gcps-contactability-genai", "name": "GCPS Contactability incl. Content GenAI", "short": "GCPS Contactability", "rag": "R", "health": 18.3, "trend": "flat", "sponsor": "Helene Ndolo", "top_risk": "Consent/compliance gate open", "exec_asks": ["Platform: Adobe vs Sitecore", "Fund extra eng capacity"], "risks": 6, "high_risks": 3, "blockers": 4, "deps": 1, "breaches": 1, "milestones_moved": 6, "cp_drift": 5, "fin": {"budget": 520000, "spent": 348798, "burn": 67.1, "eac": 613600, "var": -53207}}, {"id": "partner-skilling", "name": "Partner Skilling", "short": "Partner Skilling", "rag": "G", "health": 89.4, "trend": "up", "sponsor": "Nersa Patel", "top_risk": "Scope creep on personalization", "exec_asks": ["Confirm go-live date"], "risks": 1, "high_risks": 0, "blockers": 0, "deps": 1, "breaches": 0, "milestones_moved": 0, "cp_drift": 0, "fin": {"budget": 410000, "spent": 193539, "burn": 47.2, "eac": 385400, "var": 12353}}, {"id": "strategic-sales-motions", "name": "Strategic Sales Motions", "short": "Strategic Sales Motions", "rag": "A", "health": 55.0, "trend": "up", "sponsor": "Austin Reyes", "top_risk": "Vendor handoff slipping", "exec_asks": ["Confirm go-live date", "Fund extra eng capacity"], "risks": 5, "high_risks": 0, "blockers": 2, "deps": 1, "breaches": 0, "milestones_moved": 4, "cp_drift": 11, "fin": {"budget": 320000, "spent": 121687, "burn": 38.0, "eac": 336000, "var": -5794}}, {"id": "fy27-ws3-disti-persona", "name": "FY27 WS3 \u2014 Disti Persona", "short": "FY27 WS3 \u2014 Disti Persona", "rag": "A", "health": 56.9, "trend": "down", "sponsor": "Austin Reyes", "top_risk": "Data model not finalized", "exec_asks": ["Confirm go-live date", "Accept consent model"], "risks": 3, "high_risks": 0, "blockers": 1, "deps": 1, "breaches": 0, "milestones_moved": 3, "cp_drift": 8, "fin": {"budget": 410000, "spent": 304345, "burn": 74.2, "eac": 430500, "var": -14493}}, {"id": "adobe-vs-sitecore-rfp", "name": "Adobe vs. Sitecore \u2014 Business Case / RFP", "short": "Adobe vs. Sitecore RFP", "rag": "G", "health": 85.3, "trend": "up", "sponsor": "Darren Yetzer", "top_risk": "Key SME over-allocated", "exec_asks": ["Confirm go-live date"], "risks": 2, "high_risks": 0, "blockers": 1, "deps": 1, "breaches": 0, "milestones_moved": 1, "cp_drift": 1, "fin": {"budget": 410000, "spent": 149527, "burn": 36.5, "eac": 385400, "var": 9544}}], "scope_ws": "partner-360-nba-mvp"};
+const SCOPE = "Partner 360 \u2014 NBA MVP";
+function chatToggle(){const p=document.getElementById('chat-panel');p.classList.toggle('open');if(p.classList.contains('open'))document.getElementById('chat-input').focus();}
+function addMsg(t,who){const l=document.getElementById('chat-log');const d=document.createElement('div');d.className='msg '+who;d.textContent=t;l.appendChild(d);l.scrollTop=l.scrollHeight;}
+function ask(q){if(!q)return;addMsg(q,'me');setTimeout(()=>addMsg(answer(q),'bot'),160);document.getElementById('chat-input').value='';}
+function num(n){return (n||0).toLocaleString();}
+function money(n){return '$'+Math.round((n||0)/1000)+'k';}
+function findWs(q){
+  q=q.toLowerCase();
+  let best=null,bs=0;
+  (PMO.workstreams||[]).forEach(w=>{
+    let s=0; const hay=(w.name+' '+w.short+' '+w.id).toLowerCase();
+    hay.split(/[^a-z0-9]+/).forEach(tok=>{if(tok.length>2&&q.includes(tok))s+=tok.length;});
+    if(s>bs){bs=s;best=w;}
+  });
+  return bs>=3?best:null;
+}
+function answer(q){
+  const s=q.toLowerCase();
+  const P=PMO.portfolio;
+  // portfolio-level
+  if(/(overall|portfolio|summary|how are we|health|status).*/.test(s) && !findWs(s)){
+    if(P) return `Portfolio health: avg ${P.avg_health}/100.\nRAG: ${P.rag_counts.R} Red · ${P.rag_counts.A} Amber · ${P.rag_counts.G} Green across ${P.workstream_count} workstreams.\nHigh risks: ${P.high_risks} · Open blockers: ${P.open_blockers} · Dependency breaches: ${P.dependency_breaches} · Decisions pending: ${P.decisions_pending}.`;
+  }
+  if(/(red|at risk|at-risk|worst|trouble|concern)/.test(s)&&PMO.workstreams){
+    const reds=PMO.workstreams.filter(w=>w.rag==='R').map(w=>`• ${w.short} (health ${w.health}) — ${w.top_risk}`);
+    const ambs=PMO.workstreams.filter(w=>w.rag==='A').map(w=>w.short);
+    return (reds.length?`Red workstreams:\n${reds.join('\n')}\n\n`:'No Red workstreams. ')+`Amber: ${ambs.join(', ')||'none'}.`;
+  }
+  if(/(budget|spend|cost|financ|burn)/.test(s)){
+    const w=findWs(s);
+    if(w&&w.fin) return `${w.short} budget: ${money(w.fin.budget)}, spent ${money(w.fin.spent)} (${w.fin.burn}% burn). EAC ${money(w.fin.eac)}, variance ${w.fin.var>=0?'+':''}${money(w.fin.var)}.`;
+    if(P) return `Portfolio budget ${money(P.total_budget)}, spent ${money(P.total_spent)} (${Math.round(P.total_spent/P.total_budget*100)}% burn).`;
+  }
+  if(/(risk|raid)/.test(s)){
+    const w=findWs(s);
+    if(w) return `${w.short}: ${w.risks} open risks (${w.high_risks} high), ${w.blockers} blockers. Top risk: ${w.top_risk}.`;
+    if(P) return `Across the portfolio: ${P.high_risks} high-severity risks and ${P.open_blockers} open blockers. Ask 'which are red' to see the worst.`;
+  }
+  if(/(depend|blocked|breach|upstream|downstream)/.test(s)){
+    const w=findWs(s);
+    if(w&&w.deps!=null) return `${w.short} has ${w.deps} cross-workstream dependencies and ${w.breaches} breach(es).`;
+    if(P) return `There are ${P.dependency_breaches} dependency breach(es) portfolio-wide. Disti Activation, Contactability and App Accelerate carry the most cross-team risk.`;
+  }
+  if(/(decision|approv|sign-?off|pending)/.test(s)){
+    if(P) return `${P.decisions_pending} decisions are pending/escalated. The biggest is the Adobe AEM vs Sitecore platform direction.`;
+  }
+  if(/(meeting|cadence|overload)/.test(s)){
+    if(P) return `${P.meetings_overloaded} workstream(s) are flagged as meeting-overloaded (>9 hrs/week). Ask about a specific workstream for its meeting load.`;
+  }
+  if(/(hygiene|stale|data quality|missing owner|orphan)/.test(s)){
+    if(P) return `Average data-hygiene (fields populated): ${P.avg_data_hygiene}%. The Data Hygiene tile lists stale updates, missing owners and orphan items per workstream.`;
+  }
+  if(/(late|slip|milestone|schedule|behind)/.test(s)){
+    const w=findWs(s);
+    if(w) return `${w.short} health is ${w.health}/100, trend ${w.trend}. It moved ${w.milestones_moved||0} milestone(s) this period; critical-path drift ${w.cp_drift||0} days.`;
+  }
+  const w=findWs(s);
+  if(w){
+    return `${w.name}\nRAG ${w.rag} · health ${w.health}/100 · trend ${w.trend} · sponsor ${w.sponsor}.\nTop risk: ${w.top_risk}. Open risks ${w.risks}, blockers ${w.blockers}, ${w.deps} dependencies.\nExec ask: ${(w.exec_asks||[]).join('; ')}`;
+  }
+  return `I'm the ${SCOPE} assistant (demo, answering from the synthetic hub). Try: "overall health", "which are red", "budget for Disti Activation", "dependency breaches", "pending decisions", or a workstream name.`;
+}
+</script>
+
+</body></html>
