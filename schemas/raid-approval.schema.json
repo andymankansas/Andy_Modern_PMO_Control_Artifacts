@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "proposal_sha256", "workbook_sha256", "approved_at", "items"],
+  "properties": {
+    "version": { "const": 1 },
+    "proposal_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "workbook_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "approved_at": { "type": "string", "minLength": 1 },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["proposal_id", "disposition"],
+        "properties": {
+          "proposal_id": { "type": "string", "minLength": 1 },
+          "disposition": { "enum": ["approved", "rejected", "deferred", "needs_more_evidence"] },
+          "overrides": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+              "type": "object",
+              "required": ["value"],
+              "properties": {
+                "value": {},
+                "mode": { "enum": ["replace", "append"] },
+                "separator": { "type": "string" },
+                "value_type": { "enum": ["string", "date", "integer", "number"] }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

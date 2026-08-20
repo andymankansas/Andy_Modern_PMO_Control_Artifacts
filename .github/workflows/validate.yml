@@ -1,4 +1,4 @@
-name: Validate repository
+name: Validate RAID Review Agent
 
 on:
   push:
@@ -10,51 +10,24 @@ permissions:
   contents: read
 
 jobs:
-  validate:
+  test:
     runs-on: windows-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
-      - name: Install dependencies when present
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Validate example configuration
+        run: python scripts/raid_workbook.py validate-json raid-config.schema.json config/raid-config.example.json
+      - name: Inspect included template
+        run: python scripts/raid_workbook.py inspect templates/Workback_RAID_Template.xlsx
+      - name: Run tests
+        run: python -m pytest -q
+      - name: Reject runtime data
         shell: pwsh
         run: |
-          if (Test-Path requirements.txt) {
-            python -m pip install --upgrade pip
-            python -m pip install -r requirements.txt
-          }
-
-      - name: Run tests when present
-        shell: pwsh
-        run: |
-          if (Test-Path tests) {
-            $tests = Get-ChildItem tests -Recurse -File -ErrorAction SilentlyContinue
-            if ($tests.Count -gt 0) {
-              python -m pytest
-            }
-          }
-
-      - name: Reject tracked runtime configuration
-        shell: pwsh
-        run: |
-          if (Test-Path config/raid-config.json) {
-            throw 'Runtime config/raid-config.json must not be committed.'
-          }
-
-      - name: Reject common generated artifacts
-        shell: pwsh
-        run: |
-          $generated = Get-ChildItem -Recurse -File | Where-Object {
-            $_.Name -match '^raid-(proposal|approval|audit)_' -or
-            $_.Name -match '\.backup_.*\.xls[xm]$' -or
-            $_.Name -like '~$*.xls*'
-          }
-          if ($generated) {
-            $generated.FullName | ForEach-Object { Write-Error "Generated artifact tracked: $_" }
-            throw 'Generated or backup artifacts must not be committed.'
-          }
+          if (Test-Path config/raid-config.json) { throw 'Runtime configuration must not be committed.' }
+          $generated = Get-ChildItem output -File -ErrorAction SilentlyContinue | Where-Object Name -ne '.gitkeep'
+          if ($generated) { throw 'Generated output must not be committed.' }

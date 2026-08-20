@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "project", "workbook", "tabs", "knowledge_sources", "review", "write_policy"],
+  "properties": {
+    "version": { "const": 1 },
+    "project": {
+      "type": "object",
+      "required": ["name", "timezone", "keywords", "exclusions"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "timezone": { "type": "string", "minLength": 1 },
+        "keywords": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "exclusions": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      },
+      "additionalProperties": false
+    },
+    "workbook": {
+      "type": "object",
+      "required": ["path", "source_mode", "default_write_mode"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "source_mode": { "enum": ["existing", "included_template"] },
+        "default_write_mode": { "enum": ["new_copy", "ask_every_time"] },
+        "preserve_vba": { "type": "boolean" },
+        "requires_excel_com": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "tabs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["sheet", "item_type", "review", "headers"],
+        "properties": {
+          "sheet": { "type": "string", "minLength": 1 },
+          "item_type": { "enum": ["project_plan", "risk", "assumption", "issue", "dependency", "action", "decision", "other"] },
+          "review": { "type": "boolean" },
+          "headers": { "type": "array", "items": { "type": "string" } },
+          "stable_id_field": { "type": ["string", "null"] },
+          "allowed_statuses": { "type": "array", "items": { "type": "string" } },
+          "new_item_key_field": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "knowledge_sources": {
+      "type": "object",
+      "required": ["meeting_monitor_folders", "additional_folders", "project_files", "workiq"],
+      "properties": {
+        "meeting_monitor_folders": { "type": "array", "items": { "type": "string" } },
+        "additional_folders": { "type": "array", "items": { "type": "string" } },
+        "project_files": { "type": "array", "items": { "type": "string" } },
+        "workiq": {
+          "type": "object",
+          "required": ["enabled", "account_email", "meetings", "email", "teams"],
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "account_email": { "type": "string" },
+            "meetings": { "type": "boolean" },
+            "email": { "type": "boolean" },
+            "teams": { "type": "boolean" },
+            "tracked_meetings": { "type": "array", "items": { "type": "string" } },
+            "key_chats": { "type": "array", "items": { "type": "string" } },
+            "key_people": { "type": "array", "items": { "type": "string" } }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "review": {
+      "type": "object",
+      "required": ["lookback_days", "review_all_open_items", "include_no_change_confirmations"],
+      "properties": {
+        "lookback_days": { "type": "integer", "minimum": 1, "maximum": 365 },
+        "review_all_open_items": { "type": "boolean" },
+        "include_no_change_confirmations": { "type": "boolean" },
+        "authoritative_source_order": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "write_policy": {
+      "type": "object",
+      "required": ["approval_required", "backup_required", "block_uncertain_updates", "validate_after_write"],
+      "properties": {
+        "approval_required": { "const": true },
+        "backup_required": { "const": true },
+        "block_uncertain_updates": { "const": true },
+        "validate_after_write": { "const": true },
+        "append_history_by_default": { "type": "boolean" },
+        "highlight_changed_cells": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "project": {
+    "name": "Example Project",
+    "description": "Replace with a concise project description.",
+    "timezone": "America/Los_Angeles",
+    "keywords": ["Example Project"],
+    "exclusions": ["Unrelated workstream"]
+  },
+  "workbook": {
+    "path": "C:\\Path\\To\\Project_Workback_RAID.xlsx",
+    "source_mode": "existing",
+    "default_write_mode": "new_copy",
+    "preserve_vba": false,
+    "requires_excel_com": false
+  },
+  "tabs": [
+    {
+      "sheet": "Project_Plan",
+      "item_type": "project_plan",
+      "review": true,
+      "headers": ["#", "Phase", "Workstream", "Version", "Task", "Deliverable or Decision", "Owner", "Accountable Owner", "Status", "Start Date", "Target Date", "Closed Date", "Dependencies", "Notes", "Artifact / Source"],
+      "stable_id_field": "#",
+      "allowed_statuses": ["Not Started", "In Progress", "Blocked", "Completed"],
+      "new_item_key_field": "#"
+    },
+    {
+      "sheet": "Risk Tracker",
+      "item_type": "risk",
+      "review": true,
+      "headers": ["Date", "Risk", "Impact", "Mitigation / Action Plan", "Steps Taken", "Notes", "Status"],
+      "stable_id_field": null,
+      "allowed_statuses": ["Active", "Monitoring", "Resolved", "Closed"],
+      "new_item_key_field": "Risk"
+    },
+    {
+      "sheet": "Action Items",
+      "item_type": "action",
+      "review": true,
+      "headers": ["ID", "Action Item", "Owner", "Status", "Opened", "Target", "Closed", "Notes"],
+      "stable_id_field": "ID",
+      "allowed_statuses": ["Open", "In Progress", "Blocked", "Closed"],
+      "new_item_key_field": "ID"
+    },
+    {
+      "sheet": "Decision Log",
+      "item_type": "decision",
+      "review": true,
+      "headers": ["ID", "Decision", "Decision Date", "Decision Maker", "Notes"],
+      "stable_id_field": "ID",
+      "allowed_statuses": [],
+      "new_item_key_field": "ID"
+    }
+  ],
+  "knowledge_sources": {
+    "meeting_monitor_folders": [],
+    "additional_folders": [],
+    "project_files": [],
+    "workiq": {
+      "enabled": false,
+      "account_email": "",
+      "meetings": true,
+      "email": true,
+      "teams": true,
+      "tracked_meetings": [],
+      "key_chats": [],
+      "key_people": []
+    }
+  },
+  "review": {
+    "lookback_days": 7,
+    "review_all_open_items": true,
+    "include_no_change_confirmations": true,
+    "authoritative_source_order": ["Meeting Monitor", "Project files", "WorkIQ"]
+  },
+  "write_policy": {
+    "approval_required": true,
+    "backup_required": true,
+    "block_uncertain_updates": true,
+    "validate_after_write": true,
+    "append_history_by_default": true,
+    "highlight_changed_cells": true
+  }
+}

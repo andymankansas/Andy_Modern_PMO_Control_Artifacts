@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "workbook_path", "workbook_sha256", "created_at", "changes"],
+  "properties": {
+    "version": { "const": 1 },
+    "workbook_path": { "type": "string", "minLength": 1 },
+    "workbook_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "created_at": { "type": "string", "minLength": 1 },
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "operation", "sheet", "values", "rationale", "sources", "confidence"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "operation": { "enum": ["update", "insert"] },
+          "sheet": { "type": "string", "minLength": 1 },
+          "row": { "type": "integer", "minimum": 2 },
+          "match": {
+            "type": "object",
+            "required": ["field", "value"],
+            "properties": { "field": { "type": "string" }, "value": {} },
+            "additionalProperties": false
+          },
+          "key_field": { "type": "string" },
+          "values": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+              "type": "object",
+              "required": ["value"],
+              "properties": {
+                "value": {},
+                "mode": { "enum": ["replace", "append"] },
+                "separator": { "type": "string" },
+                "value_type": { "enum": ["string", "date", "integer", "number"] }
+              },
+              "additionalProperties": false
+            }
+          },
+          "rationale": { "type": "string", "minLength": 1 },
+          "sources": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "confidence": { "enum": ["high", "medium", "uncertain"] }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": { "properties": { "operation": { "const": "update" } } },
+            "then": { "anyOf": [{ "required": ["row"] }, { "required": ["match"] }] }
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}
