@@ -1,0 +1,60 @@
+name: Validate repository
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies when present
+        shell: pwsh
+        run: |
+          if (Test-Path requirements.txt) {
+            python -m pip install --upgrade pip
+            python -m pip install -r requirements.txt
+          }
+
+      - name: Run tests when present
+        shell: pwsh
+        run: |
+          if (Test-Path tests) {
+            $tests = Get-ChildItem tests -Recurse -File -ErrorAction SilentlyContinue
+            if ($tests.Count -gt 0) {
+              python -m pytest
+            }
+          }
+
+      - name: Reject tracked runtime configuration
+        shell: pwsh
+        run: |
+          if (Test-Path config/raid-config.json) {
+            throw 'Runtime config/raid-config.json must not be committed.'
+          }
+
+      - name: Reject common generated artifacts
+        shell: pwsh
+        run: |
+          $generated = Get-ChildItem -Recurse -File | Where-Object {
+            $_.Name -match '^raid-(proposal|approval|audit)_' -or
+            $_.Name -match '\.backup_.*\.xls[xm]$' -or
+            $_.Name -like '~$*.xls*'
+          }
+          if ($generated) {
+            $generated.FullName | ForEach-Object { Write-Error "Generated artifact tracked: $_" }
+            throw 'Generated or backup artifacts must not be committed.'
+          }

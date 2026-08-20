@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security report
+    url: https://github.com/andymankansas/Andy_Modern_PMO_Control_Artifacts/security
+    about: Report sensitive security concerns privately.
