@@ -1,65 +1,48 @@
-# RAID Review Agent
+# Andy Modern PMO Control Artifacts
 
-A configurable VS Code and GitHub Copilot workflow for evidence-grounded Workback and RAID reviews.
+A collection of installable VS Code and GitHub Copilot agent packages for modern PMO control and reporting. Each agent lives in its own folder under `agents/` and ships as its own versioned release.
 
-## Capabilities
+## Available agents
 
-- Uses an existing workbook or copies the included sanitized template.
-- Reviews configured project plan, risk, action, and decision tabs.
-- Reads local Meeting Monitor and knowledge-base artifacts.
-- Optionally supplements local evidence with WorkIQ meetings, email, Teams, and files.
-- Produces a read-only proposal before any workbook change.
-- Conducts formal item-by-item approval.
-- Applies only approved changes through a deterministic Python writer.
-- Creates a timestamped backup and validates every saved value.
+| Agent | Folder | Latest release |
+| --- | --- | --- |
+| RAID Review Agent | [`agents/raid-review-agent`](agents/raid-review-agent) | [releases](https://github.com/andymankansas/Andy_Modern_PMO_Control_Artifacts/releases?q=raid-review-agent) |
 
-## Safety Model
+## Download and install
 
-The workflow has four persisted phases:
+1. Open the [Releases](https://github.com/andymankansas/Andy_Modern_PMO_Control_Artifacts/releases) page.
+2. Find the release for the agent you want (the tag name starts with the agent slug).
+3. Download that release's `*_Setup_<version>.zip` and, optionally, the matching `.sha256`.
+4. Extract it, open the folder in VS Code, and follow that agent's `INSTALL.md`.
 
-1. Review and proposal.
-2. User review and disposition.
-3. Approval manifest finalization.
-4. Apply, reopen, validate, and audit.
+## Releases and versioning
 
-Review and approval never modify the workbook. Uncertain recommendations cannot be written. A changed workbook fingerprint invalidates prior approval.
+Every agent has an independent release series. Tags are product-scoped so each agent is unambiguous:
 
-## Install
-
-Extract the release ZIP, open the extracted folder in VS Code, and run:
-
-```powershell
-Set-ExecutionPolicy -Scope Process RemoteSigned
-.\setup.ps1
+```
+<agent-slug>/vMAJOR.MINOR.PATCH[-prerelease]
 ```
 
-Then select **RAID Review Agent** in VS Code Chat and run **RAID Setup**.
+Examples:
 
-See [INSTALL.md](INSTALL.md) for prerequisites and setup details.
+- `raid-review-agent/v1.0.0-preview.1`
+- `raid-review-agent/v1.0.0`
+- `meeting-monitor-agent/v1.0.0`
 
-## Normal Workflow
+Rules:
 
-1. Run **RAID Review**.
-2. Inspect the generated Markdown proposal.
-3. Run **RAID Approve** and disposition every item.
-4. Run **RAID Apply Approved**.
-5. Retain the generated audit JSON with the updated workbook.
+- One release series per agent. Never reuse a bare `vX.Y.Z` tag across agents.
+- Each release carries only that agent's ZIP and `.sha256`.
+- Mark unfinished builds as pre-releases.
+- Release titles stay human-readable, for example "RAID Review Agent v1.0.0-preview.1".
 
-## Package Layout
+## Adding a new agent
 
-- `.github/agents/`: custom agent definition.
-- `.github/prompts/`: setup, review, approval, apply, and reconfiguration prompts.
-- `config/`: example runtime configuration.
-- `schemas/`: JSON contracts for configuration, proposals, and approvals.
-- `scripts/`: deterministic workbook and release tools.
-- `templates/`: sanitized Workback and RAID template.
-- `tests/`: executable safety and writer tests.
-- `output/`: local proposals, approvals, and audits. Contents are ignored by Git.
+1. Create `agents/<agent-slug>/` with its own `README.md`, `INSTALL.md`, `setup.ps1`, and `scripts/build_release.ps1`.
+2. Add a validation job for it under `.github/workflows/`.
+3. Build its ZIP and publish a release tagged `<agent-slug>/vX.Y.Z`.
+4. Add a row to the table above.
 
-## Data Handling
+## Data handling
 
-Do not commit runtime configuration, project workbooks, meeting artifacts, proposals, approvals, audits, backups, mailbox data, or Teams data. The included template contains no project data.
-
-## Current Platform
-
-The installer targets Windows because the intended experience uses VS Code, PowerShell, OneDrive or SharePoint synced paths, and optional desktop Excel compatibility. Standard `.xlsx` writing uses Python and does not require desktop Excel.
+Do not commit runtime configuration, project workbooks, meeting artifacts, exports, proposals, approvals, audits, backups, or any personal or tenant data. See each agent's `SECURITY.md`.
