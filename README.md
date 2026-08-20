@@ -38,7 +38,7 @@ Rules:
 
 ## Adding a new agent
 
-1. Create `agents/<agent-slug>/` with its own `README.md`, `INSTALL.md`, `setup.ps1`, and `scripts/build_release.ps1`.
+1. Copy [`templates/agent-starter`](templates/agent-starter) to `agents/<agent-slug>/` and replace the placeholders (see the starter's `HOW-TO-USE.md`).
 2. Add a validation job for it under `.github/workflows/`.
 3. Build its ZIP and publish a release tagged `<agent-slug>/vX.Y.Z`.
 4. Add a row to the table above.
@@ -46,3 +46,4 @@ Rules:
 ## Data handling
 
 Do not commit runtime configuration, project workbooks, meeting artifacts, exports, proposals, approvals, audits, backups, or any personal or tenant data. See each agent's `SECURITY.md`.
+
