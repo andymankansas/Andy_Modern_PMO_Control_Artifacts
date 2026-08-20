@@ -1,0 +1,49 @@
+name: Validate Meeting Monitor Agent
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "agents/meeting-monitor-agent/**"
+      - ".github/workflows/validate-meeting-monitor-agent.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "agents/meeting-monitor-agent/**"
+      - ".github/workflows/validate-meeting-monitor-agent.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: agents/meeting-monitor-agent
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate agent frontmatter
+        shell: pwsh
+        run: |
+          $agent = ".github/agents/meeting-monitor.agent.md"
+          if (-not (Test-Path $agent)) { throw "Missing agent file: $agent" }
+          $text = Get-Content $agent -Raw
+          if ($text -notmatch "(?ms)^---\s.*\bname:\s*Meeting Monitor\b.*\bdescription:\s*.+?---") {
+            throw "Agent frontmatter is missing required name/description."
+          }
+          Write-Host "Frontmatter OK."
+      - name: Scan for personal or tenant data
+        shell: pwsh
+        run: |
+          $patterns = @("reply\.com","a[._]lees","v-anlees","b00367e2-193a-4f48-94de-7245d45c0947","\u2014","\u2013")
+          $hits = @()
+          Get-ChildItem -Recurse -File -Include *.md,*.ps1,*.json |
+            ForEach-Object {
+              $content = Get-Content $_.FullName -Raw
+              foreach ($p in $patterns) {
+                if ($content -match $p) { $hits += "$($_.Name): /$p/" }
+              }
+            }
+          if ($hits) { $hits | ForEach-Object { Write-Error $_ }; throw "Forbidden content found." }
+          Write-Host "No personal or tenant data found."

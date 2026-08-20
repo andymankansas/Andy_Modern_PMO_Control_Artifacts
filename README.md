@@ -7,6 +7,7 @@ A collection of installable VS Code and GitHub Copilot agent packages for modern
 | Agent | Folder | Latest release |
 | --- | --- | --- |
 | RAID Review Agent | [`agents/raid-review-agent`](agents/raid-review-agent) | [releases](https://github.com/andymankansas/Andy_Modern_PMO_Control_Artifacts/releases?q=raid-review-agent) |
+| Meeting Monitor Agent | [`agents/meeting-monitor-agent`](agents/meeting-monitor-agent) | [releases](https://github.com/andymankansas/Andy_Modern_PMO_Control_Artifacts/releases?q=meeting-monitor-agent) |
 
 ## Download and install
 
@@ -46,4 +47,5 @@ Rules:
 ## Data handling
 
 Do not commit runtime configuration, project workbooks, meeting artifacts, exports, proposals, approvals, audits, backups, or any personal or tenant data. See each agent's `SECURITY.md`.
+
 
