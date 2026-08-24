@@ -1,0 +1,28 @@
+{
+  "workstreams": ["ProjectX"],
+  "artifacts_dirs": {
+    "ProjectX": "PATH\\TO\\your notes folder"
+  },
+  "store_dir": "context_layer/store",
+  "mirror_dir": "",
+  "seed_terms": [
+    "ProjectX", "add", "your", "keywords", "here"
+  ],
+  "systems": ["SystemA", "SystemB"],
+  "stage_keywords": {
+    "1": ["intake", "request"],
+    "2": ["review", "validate"],
+    "3": ["build", "implement"],
+    "4": ["publish", "release"],
+    "5": ["archive", "deprecate"]
+  },
+  "stage_names": {
+    "1": "Intake",
+    "2": "Review",
+    "3": "Build",
+    "4": "Publish",
+    "5": "Archive"
+  },
+  "drift_baseline_days": 14,
+  "lineage_match_threshold": 0.72
+}

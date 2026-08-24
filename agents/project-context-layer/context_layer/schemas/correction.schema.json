@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ContextCorrection",
+  "type": "object",
+  "required": ["iso", "trigger", "pattern", "decision", "rule", "scope"],
+  "properties": {
+    "iso": { "type": "string" },
+    "trigger": { "type": "string", "description": "what prompted the judgment call, e.g. borderline_seed_match, scope_decision, taxonomy_add" },
+    "pattern": { "type": "string", "description": "the recognizable situation this rule applies to" },
+    "decision": { "type": "string", "description": "include | skip | keep_aem | add_term | ..." },
+    "rule": { "type": "string", "description": "human-readable norm to apply next time" },
+    "scope": { "type": "string", "description": "teams_sweep | email_sweep | meeting | global" }
+  }
+}

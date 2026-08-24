@@ -1,0 +1,5 @@
+# Never commit project data or personal config.
+context_layer/store/
+context_layer/config.json
+__pycache__/
+*.pyc

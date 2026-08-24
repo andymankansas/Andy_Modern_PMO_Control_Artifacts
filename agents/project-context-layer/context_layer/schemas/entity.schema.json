@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ContextEntity",
+  "type": "object",
+  "required": ["id", "type", "workstream", "title", "first_seen", "last_seen"],
+  "properties": {
+    "id": { "type": "string", "description": "Stable, type-prefixed id, e.g. action_item-20260812-0003" },
+    "type": {
+      "type": "string",
+      "enum": ["person", "meeting", "email_thread", "teams_thread", "decision", "action_item", "risk", "artifact", "system", "stage"]
+    },
+    "workstream": { "type": "string" },
+    "title": { "type": "string" },
+    "status": { "type": ["string", "null"], "description": "open | closed | slipped | superseded | active | monitoring | null" },
+    "owner_ref": { "type": ["string", "null"], "description": "id of a person entity" },
+    "due": { "type": ["string", "null"], "description": "YYYY-MM-DD or null" },
+    "stage": { "type": ["integer", "null"], "description": "AEM workflow stage 1-9 or null" },
+    "systems": { "type": "array", "items": { "type": "string" } },
+    "confidence": { "type": "string", "enum": ["high", "medium", "low"] },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_type", "source_file", "extracted_iso", "method"],
+        "properties": {
+          "source_type": { "type": "string" },
+          "source_file": { "type": "string" },
+          "extracted_iso": { "type": "string" },
+          "method": { "type": "string", "enum": ["verbatim", "transcript", "ai_notes", "inferred"] }
+        }
+      }
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["iso", "change"],
+        "properties": {
+          "iso": { "type": "string" },
+          "change": { "type": "string" },
+          "source_file": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "thread_key": { "type": ["string", "null"] },
+    "first_seen": { "type": "string" },
+    "last_seen": { "type": "string" },
+    "text": { "type": "string" }
+  }
+}

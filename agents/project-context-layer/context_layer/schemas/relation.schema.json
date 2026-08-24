@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ContextRelation",
+  "type": "object",
+  "required": ["id", "from", "type", "to"],
+  "properties": {
+    "id": { "type": "string" },
+    "from": { "type": "string", "description": "entity id" },
+    "type": {
+      "type": "string",
+      "enum": ["owned_by", "raised_in", "supersedes", "blocks", "about_system", "at_stage", "part_of_thread", "attended", "produced"]
+    },
+    "to": { "type": "string", "description": "entity id" },
+    "source_file": { "type": ["string", "null"] },
+    "iso": { "type": ["string", "null"] }
+  }
+}
