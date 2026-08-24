@@ -79,7 +79,7 @@ def _bullets(lines: list[str]) -> list[str]:
         m = BULLET_RE.match(line)
         if m:
             txt = re.sub(r"\*\*|__", "", m.group(1)).strip()
-            if txt and txt not in {"-", "—", "None", "N/A"}:
+            if txt and txt not in {"-", "\u2014", "None", "N/A"}:
                 out.append(txt)
     return out
 
@@ -253,7 +253,7 @@ def _harvest_digest(body: list[str], add_entity, relations, cfg) -> None:
     dec_raw = meta.get("decisions", "")
 
     def _substantive(v: str) -> bool:
-        return bool(v) and v.strip().strip("-").strip() not in {"", "None", "N/A", "—", "-"}
+        return bool(v) and v.strip().strip("-").strip() not in {"", "None", "N/A", "\u2014", "-"}
 
     if _substantive(ai_raw):
         for part in re.split(r";|\n", ai_raw):
