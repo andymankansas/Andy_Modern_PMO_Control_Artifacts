@@ -63,7 +63,7 @@ jobs:
           python scripts/validate_json.py walking-deck-content.schema.json samples/sample_project_content.json
 
       - name: Build the demo deck
-        run: python scripts/build_deck.py --config config/walking-deck-config.example.json
+        run: python scripts/build_deck.py --config config/walking-deck-config.example.json --out "${{ runner.temp }}/walking-deck-demo.pptx"
 
       - name: Run tests
         run: python -m pytest -q
