@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "walking-deck-content.schema.json",
+  "title": "Walking Deck Content",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "title": {"type": "string"},
+        "subtitle": {"type": "string"},
+        "author": {"type": "string"},
+        "footer": {"type": "string"},
+        "comments": {"type": "string"}
+      }
+    },
+    "cover": {"type": "object"},
+    "agenda": {"type": "object"},
+    "problem": {"type": "object"},
+    "vision": {"type": "object"},
+    "how_it_works": {"type": "object"},
+    "roles": {"type": "object"},
+    "scope": {"type": "object"},
+    "roadmap": {"type": "object"},
+    "milestones": {"type": "object"},
+    "current_state": {"type": "object"},
+    "team": {"type": "object"},
+    "next_steps": {"type": "object"},
+    "closer": {"type": "object"},
+    "section": {"type": "object"},
+    "bullets": {"type": "object"}
+  }
+}

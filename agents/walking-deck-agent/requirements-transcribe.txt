@@ -1,0 +1,4 @@
+# Optional: local, offline meeting-recording transcription.
+# Install only if you want to transcribe .mp4/.wav recordings:
+#   pip install -r requirements-transcribe.txt
+faster-whisper>=1.0,<2

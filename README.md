@@ -10,6 +10,7 @@ A collection of installable VS Code and GitHub Copilot agent packages for modern
 | Meeting Monitor Agent | [`agents/meeting-monitor-agent`](agents/meeting-monitor-agent) | [releases](https://github.com/andymankansas/Andy_Modern_PMO_Control_Artifacts/releases?q=meeting-monitor-agent) |
 | Project Context Layer | [`agents/project-context-layer`](agents/project-context-layer) | [releases](https://github.com/andymankansas/Andy_Modern_PMO_Control_Artifacts/releases?q=project-context-layer) |
 | WBR Agent | [`agents/wbr-agent`](agents/wbr-agent) | [releases](https://github.com/andymankansas/Andy_Modern_PMO_Control_Artifacts/releases?q=wbr-agent) |
+| Walking Deck Agent | [`agents/walking-deck-agent`](agents/walking-deck-agent) | [releases](https://github.com/andymankansas/Andy_Modern_PMO_Control_Artifacts/releases?q=walking-deck-agent) |
 
 ## Download and install
 

@@ -1,0 +1,42 @@
+{
+  "project_slug": "demo-project",
+  "brand": {
+    "primary": "#0067B8",
+    "accent": "#00A4EF",
+    "dark": "#0F2337",
+    "pale": "#D3F1FC",
+    "light": "#ECF7FC",
+    "title_font": "Arial",
+    "body_font": "Segoe UI",
+    "logo_path": null,
+    "hero_path": null
+  },
+  "output": {
+    "folder": "output",
+    "filename": "{slug}_Walking_Deck_{date}.pptx"
+  },
+  "slides": [
+    "cover",
+    "agenda",
+    "problem",
+    "vision",
+    "how_it_works",
+    "roles",
+    "roadmap",
+    "milestones",
+    "current_state",
+    "team",
+    "next_steps",
+    "closer"
+  ],
+  "sources": {
+    "artifact_folders": [],
+    "workiq": {
+      "enabled": false,
+      "account": "",
+      "meetings": [],
+      "people": []
+    }
+  },
+  "content_file": "samples/sample_project_content.json"
+}

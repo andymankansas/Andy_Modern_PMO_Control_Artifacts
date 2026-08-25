@@ -1,0 +1,77 @@
+name: Validate Walking Deck Agent
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "agents/walking-deck-agent/**"
+      - ".github/workflows/validate-walking-deck-agent.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "agents/walking-deck-agent/**"
+      - ".github/workflows/validate-walking-deck-agent.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: agents/walking-deck-agent
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate agent frontmatter
+        shell: pwsh
+        run: |
+          $agent = ".github/agents/walking-deck-agent.agent.md"
+          if (-not (Test-Path $agent)) { throw "Missing agent file: $agent" }
+          $text = Get-Content $agent -Raw
+          if ($text -notmatch "(?ms)^---\s.*\bname:\s*Walking Deck Agent\b.*\bdescription:\s*.+?---") {
+            throw "Agent frontmatter is missing required name/description."
+          }
+          Write-Host "Frontmatter OK."
+
+      - name: Scan for personal or tenant data
+        shell: pwsh
+        run: |
+          $patterns = @("reply\.com","a[._]lees","v-anlees","b00367e2-193a-4f48-94de-7245d45c0947",[char]0x2014,[char]0x2013)
+          $hits = @()
+          Get-ChildItem -Recurse -File -Include *.md,*.ps1,*.json,*.py,*.txt,*.yml |
+            Where-Object { $_.FullName -notmatch "[\\/](\.venv|__pycache__|\.pytest_cache|output)[\\/]" } |
+            ForEach-Object {
+              $content = Get-Content $_.FullName -Raw
+              foreach ($p in $patterns) {
+                if ($content -match $p) { $hits += "$($_.Name): /$p/" }
+              }
+            }
+          if ($hits) { $hits | ForEach-Object { Write-Error $_ }; throw "Forbidden content found." }
+          Write-Host "No personal or tenant data found."
+
+      - name: Install dependencies
+        run: python -m pip install --quiet -r requirements.txt
+
+      - name: Validate example configuration and sample content
+        run: |
+          python scripts/validate_json.py walking-deck-config.schema.json config/walking-deck-config.example.json
+          python scripts/validate_json.py walking-deck-content.schema.json samples/sample_project_content.json
+
+      - name: Build the demo deck
+        run: python scripts/build_deck.py --config config/walking-deck-config.example.json
+
+      - name: Run tests
+        run: python -m pytest -q
+
+      - name: Reject runtime data
+        shell: pwsh
+        run: |
+          if (Test-Path config/walking-deck-config.json) { throw 'Runtime configuration must not be committed.' }
+          if (Test-Path config/walking-deck-content.json) { throw 'Runtime content must not be committed.' }
+          $generated = Get-ChildItem output -File -ErrorAction SilentlyContinue | Where-Object Name -ne '.gitkeep'
+          if ($generated) { throw 'Generated output must not be committed.' }

@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+config/walking-deck-config.json
+config/walking-deck-content.json
+output/*
+!output/.gitkeep
+*_Walking_Deck_*.pptx
+intake_manifest.json
+*_Transcript.txt
+*_Transcript_plain.txt
+.env
+.env.*
+.DS_Store
+Thumbs.db

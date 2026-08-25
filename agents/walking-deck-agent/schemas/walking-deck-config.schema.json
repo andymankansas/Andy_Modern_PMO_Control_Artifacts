@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "walking-deck-config.schema.json",
+  "title": "Walking Deck Config",
+  "type": "object",
+  "required": ["project_slug", "slides"],
+  "additionalProperties": false,
+  "properties": {
+    "project_slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "description": "Lowercase slug used in output filenames."
+    },
+    "brand": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "primary": {"type": "string", "pattern": "^#?[0-9A-Fa-f]{6}$"},
+        "accent": {"type": "string", "pattern": "^#?[0-9A-Fa-f]{6}$"},
+        "dark": {"type": "string", "pattern": "^#?[0-9A-Fa-f]{6}$"},
+        "pale": {"type": "string", "pattern": "^#?[0-9A-Fa-f]{6}$"},
+        "light": {"type": "string", "pattern": "^#?[0-9A-Fa-f]{6}$"},
+        "title_font": {"type": "string"},
+        "body_font": {"type": "string"},
+        "logo_path": {"type": ["string", "null"]},
+        "hero_path": {"type": ["string", "null"]}
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "folder": {"type": "string"},
+        "filename": {"type": "string"}
+      }
+    },
+    "slides": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "type": "string",
+            "enum": ["cover", "agenda", "problem", "vision", "how_it_works", "roles", "scope", "roadmap", "milestones", "current_state", "team", "next_steps", "closer", "section", "bullets"]
+          },
+          {
+            "type": "object",
+            "required": ["block"],
+            "additionalProperties": false,
+            "properties": {
+              "block": {"type": "string", "enum": ["cover", "agenda", "problem", "vision", "how_it_works", "roles", "scope", "roadmap", "milestones", "current_state", "team", "next_steps", "closer", "section", "bullets"]},
+              "content_key": {"type": "string"},
+              "content": {"type": "object"}
+            }
+          }
+        ]
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "artifact_folders": {"type": "array", "items": {"type": "string"}},
+        "workiq": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "account": {"type": "string"},
+            "meetings": {"type": "array", "items": {"type": "string"}},
+            "people": {"type": "array", "items": {"type": "string"}}
+          }
+        }
+      }
+    },
+    "content_file": {"type": "string"}
+  }
+}

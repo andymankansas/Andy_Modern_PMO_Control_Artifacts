@@ -1,0 +1,191 @@
+{
+  "meta": {
+    "title": "Acme Customer Portal - Walking Deck",
+    "subtitle": "A governed delivery story from discovery to adoption",
+    "author": "Program Team",
+    "footer": "ACME CUSTOMER PORTAL  |  WALKING DECK",
+    "comments": "Sample content that ships with the Walking Deck Agent. Replace with your project."
+  },
+  "cover": {
+    "eyebrow": "Program Artifact",
+    "title": "ACME CUSTOMER PORTAL\nWALKING DECK",
+    "subtitle": "One self-service view of the program, readable in 10-20 minutes",
+    "stamp": "Updated for review",
+    "notes": "A walking deck is a self-service story a newcomer can read without a presenter."
+  },
+  "agenda": {
+    "title": "THE STORY IN 10-20 MINUTES",
+    "takeaway": "Told like a news story: the need, the solution, how it works, and where we go next.",
+    "items": [
+      {"num": "01", "head": "WHY CHANGE", "body": "The business context, the pain, and the cost of the status quo"},
+      {"num": "02", "head": "THE SOLUTION", "body": "One operating model that standardizes and scales"},
+      {"num": "03", "head": "HOW IT WORKS", "body": "The delivery lifecycle and each team's clear job"},
+      {"num": "04", "head": "WHERE WE ARE GOING", "body": "Roadmap, milestones, and current state"},
+      {"num": "05", "head": "WHO MOVES IT FORWARD", "body": "Team, ownership, and next moves"}
+    ]
+  },
+  "problem": {
+    "title": "WHY WE'RE HERE: ONE TRUSTED CUSTOMER EXPERIENCE",
+    "takeaway": "Customer data and journeys are scattered across tools, creating cost, rework, and inconsistent service.",
+    "context": {
+      "label": "WHO WE SERVE",
+      "text": "Acme customer-facing teams (support, sales, success). What they care about: fast, consistent, compliant service - one view of the customer, everywhere."
+    },
+    "cards": [
+      {"head": "FRAGMENTED TOOLS", "accent": "primary", "bullets": [["Many systems. ", "Data lives in CRM, tickets, and spreadsheets."], ["Context is lost. ", "Teams re-key and re-explain."], ["Legacy friction. ", "Manual workarounds add dependency."]]},
+      {"head": "DATA & PROCESS DRIFT", "accent": "accent", "bullets": [["Definitions differ. ", "Each team measures customers differently."], ["Handoffs break. ", "No shared source of truth."], ["Duplicates emerge. ", "Records drift apart."]]},
+      {"head": "BUSINESS IMPACT", "accent": "amber", "bullets": [["Higher cost. ", "Rework and swivel-chair effort."], ["Lower trust. ", "Leaders can't see the whole picture."], ["Hard to scale. ", "Growth multiplies the mess."]]}
+    ],
+    "source": "Confirm objectives and success measures with the sponsor.",
+    "notes": "So what: today the same work is done many times and customers get inconsistent service."
+  },
+  "vision": {
+    "title": "THE OPERATING MODEL: STANDARDIZE ONCE, REUSE EVERYWHERE",
+    "takeaway": "One governed path reduces cost and gives every team the same trusted customer view.",
+    "label": "OPERATING MODEL",
+    "statement": "Every interaction follows one visible, repeatable path - capture, govern, serve, and measure.",
+    "steps": [
+      {"num": "01", "head": "TRUSTED SOURCE", "body": "One system of record for the customer."},
+      {"num": "02", "head": "GOVERNED INTAKE", "body": "Standard capture, review, and routing."},
+      {"num": "03", "head": "CONSISTENT DATA", "body": "Shared definitions improve reporting."},
+      {"num": "04", "head": "ACTIVATED SERVICE", "body": "The same view reaches every channel."}
+    ],
+    "sowhat": "The so-what:  lower cost (do it once)   •   higher trust (one version)   •   faster service (governed reuse).",
+    "notes": "Lead with the why: standardization reduces cost and eliminates multiple versions of the truth."
+  },
+  "how_it_works": {
+    "title": "HOW IT WORKS: GOVERNANCE TRAVELS WITH THE WORK",
+    "takeaway": "Each stage adds a control that protects quality, compliance, and findability.",
+    "stages": [
+      {"num": "1", "head": "CAPTURE", "body": "Intake from every channel"},
+      {"num": "2", "head": "QUALIFY", "body": "Validate and enrich"},
+      {"num": "3", "head": "ROUTE", "body": "Assign to the right team"},
+      {"num": "4", "head": "SERVE", "body": "Resolve with full context"},
+      {"num": "5", "head": "RECORD", "body": "System of record updated"},
+      {"num": "6", "head": "SYNC", "body": "Controlled downstream flow"},
+      {"num": "7", "head": "MEASURE", "body": "Reporting and insights"},
+      {"num": "8", "head": "ENABLE", "body": "Training and adoption"},
+      {"num": "9", "head": "RETIRE", "body": "Legacy tool deprecation"}
+    ],
+    "governance": "Single owner, validated once, consistent data, controlled routing, scoped access, and measured outcomes - so leaders always know the state of the work.",
+    "governance_label": "WHY IT\nMATTERS",
+    "notes": "Spell out the governance benefit of each step in plain language."
+  },
+  "roles": {
+    "title": "EACH TEAM HAS ONE CLEAR JOB",
+    "takeaway": "Clear ownership is the win: one intake, one source, many service channels.",
+    "cards": [
+      {"name": "INTAKE", "role": "GOVERNS CAPTURE", "accent": "primary", "rows": [["Owns: ", "channels, forms, routing."], ["Why it matters: ", "one front door."], ["Vs today: ", "scattered requests."]]},
+      {"name": "PLATFORM", "role": "GOVERNS THE RECORD", "accent": "accent", "rows": [["Owns: ", "system of record, data model."], ["Why it matters: ", "one source of truth."], ["Vs today: ", "copies drift apart."]]},
+      {"name": "SERVICE", "role": "SERVES CUSTOMERS", "accent": "green", "rows": [["Owns: ", "resolution and follow-up."], ["Why it matters: ", "consistent experience."], ["Vs today: ", "inconsistent answers."]]},
+      {"name": "INSIGHTS", "role": "MEASURES OUTCOMES", "accent": "dark", "rows": [["Owns: ", "reporting and KPIs."], ["Why it matters: ", "decisions on real data."], ["Vs today: ", "manual exports."]]}
+    ],
+    "footnote": "Channels: web, phone, email, chat, and partner portals.",
+    "source": "Ownership maps back to the pain points: cost, trust, and scale.",
+    "notes": "Standardize the categories across all cards so the audience compares like-for-like."
+  },
+  "roadmap": {
+    "title": "THE ROADMAP: PROVE IT, THEN SCALE",
+    "takeaway": "We are here - Phase 1 launches now; Phase 2 follows; the model then scales.",
+    "waves": [
+      {"head": "PHASE 1  ·  SUPPORT", "status": "IN PROGRESS", "sub": "PROVE THE PATTERN", "accent": "green", "body": "Support intake and system of record live and stabilized."},
+      {"head": "ENABLERS", "status": "IN FLIGHT", "sub": "DATA + GOVERNANCE", "accent": "amber", "body": "Shared data model and governance establish the path."},
+      {"head": "PHASE 2  ·  SALES", "status": "NEXT", "sub": "REPEAT AND SCALE", "accent": "primary", "body": "Apply the proven cycle to sales, then success."}
+    ],
+    "cycle": [
+      {"num": "1", "head": "DISCOVER", "body": "Inventory, owners"},
+      {"num": "2", "head": "DESIGN", "body": "Data, process"},
+      {"num": "3", "head": "BUILD", "body": "Configure, migrate"},
+      {"num": "4", "head": "INTEGRATE", "body": "Connect, secure"},
+      {"num": "5", "head": "VALIDATE", "body": "Test, sign-off"},
+      {"num": "6", "head": "ENABLE", "body": "Train, stabilize"}
+    ],
+    "outcome": "Support live  •  Governance embedded  •  Sales integrated  •  Success onboarded",
+    "outcome_label": "YEAR OUTCOME",
+    "notes": "Start the timeline section here, then drill into the current phase."
+  },
+  "milestones": {
+    "title": "PHASE 1 (SUPPORT): DELIVERY MILESTONES",
+    "takeaway": "Discovery and build are done; launch is near; integration and retirement close out the year.",
+    "items": [
+      {"date": "DONE", "head": "DISCOVER &\nDESIGN", "body": "Data model and\nprocess defined", "status": "complete"},
+      {"date": "DONE", "head": "BUILD &\nMIGRATE", "body": "Records loaded;\nreconciled", "status": "complete"},
+      {"date": "THIS WEEK", "head": "PILOT\nTRAINING", "body": "First team\nenabled", "status": "complete"},
+      {"date": "SOON", "head": "SUPPORT\nLAUNCH", "body": "Go-live target", "status": "active"},
+      {"date": "NEXT MONTH", "head": "VALIDATE &\nSTABILIZE", "body": "Data and access\ncleanup", "status": "active"},
+      {"date": "QUARTER", "head": "SALES\nINTEGRATION", "body": "Phase 2 begins", "status": "upcoming"},
+      {"date": "YEAR END", "head": "LEGACY\nRETIREMENT", "body": "Old tools\ndeprecated", "status": "upcoming"}
+    ],
+    "critical_path": "Critical path:  data + access  ->  validation  ->  governed service  ->  integration  ->  retirement",
+    "source": "High-level dates; task-level detail lives in the plan.",
+    "notes": "Merge delivery phases and roadmap into one dated view."
+  },
+  "current_state": {
+    "title": "WHERE WE ARE NOW: BUILD DONE, LAUNCH AMBER",
+    "takeaway": "A level-set: build is complete; launch and validation are the active work.",
+    "mode": "CURRENT MODE  |  Validate the flow, close data and access exceptions, enable users, and prepare retirement.",
+    "cards": [
+      {"head": "COMPLETE", "accent": "green", "bullets": [["Build and migration ", "of core records."], ["Data model ", "and governance design."], ["Pilot training ", "with the first team."]]},
+      {"head": "NOW STABILIZING", "accent": "accent", "bullets": [["Access and roles ", "being finalized."], ["Validation ", "of end-to-end flow."], ["Support coverage ", "for go-live."]]},
+      {"head": "ACTIVE RISK", "accent": "red", "bullets": [["Data exceptions ", "still being closed."], ["Integration ", "not yet live."], ["Adoption ", "depends on training."]]}
+    ],
+    "source": "Status as of this review.",
+    "notes": "Keep it honest: launch is near, closure remains amber until validation lands."
+  },
+  "team": {
+    "title": "DELIVERY DEPENDS ON SHARED OWNERSHIP",
+    "takeaway": "Business, platform, service operations, and program controls move as one team.",
+    "owners_label": "CORE OWNERSHIP MAP",
+    "owners": [
+      {"role": "BUSINESS SPONSOR", "names": "Sponsor Name", "accent": "primary"},
+      {"role": "PROGRAM MANAGEMENT", "names": "PM Name", "accent": "amber"},
+      {"role": "PLATFORM & DATA", "names": "Lead Name", "accent": "accent"},
+      {"role": "SERVICE OPERATIONS", "names": "Ops Lead", "accent": "green"},
+      {"role": "INTEGRATION", "names": "Eng Lead", "accent": "primary"},
+      {"role": "CHANGE & TRAINING", "names": "Enablement Lead", "accent": "accent"},
+      {"role": "REPORTING & INSIGHTS", "names": "Analyst", "accent": "green"}
+    ],
+    "rhythm_label": "OPERATING RHYTHM",
+    "rhythm": [
+      ["Weekly delivery sync. ", "Build, migration, validation, actions."],
+      ["Operations review. ", "Service readiness and adoption."],
+      ["Go / no-go. ", "Evidence-based readiness and support."],
+      ["Plan + RAID governance. ", "Milestones, risks, decisions, owners."],
+      ["Training and comms. ", "Role-based enablement before transitions."]
+    ],
+    "notes": "The easy slide. Names tie the model to accountable owners."
+  },
+  "next_steps": {
+    "title": "FINISH THE FLOW, THEN MAKE IT DURABLE",
+    "takeaway": "The immediate ask is disciplined closure of Phase 1 - not another redesign.",
+    "moves_label": "NEXT MOVES",
+    "moves": [
+      {"num": "1", "action": "Confirm data load and access reconciliation.", "timing": "This week"},
+      {"num": "2", "action": "Launch support and capture sign-off.", "timing": "Soon"},
+      {"num": "3", "action": "Close data and access exceptions under change control.", "timing": "This month"},
+      {"num": "4", "action": "Complete training, docs, and support coverage.", "timing": "This month"},
+      {"num": "5", "action": "Integrate sales and plan legacy retirement.", "timing": "Quarter"}
+    ],
+    "help_label": "LEADERSHIP HELP WANTED",
+    "help": [
+      ["Protect the critical path. ", "Prioritize validation and access."],
+      ["Reinforce one operating model. ", "One intake, one record, many channels."],
+      ["Fund stabilization. ", "Maintain support until evidence supports closure."],
+      ["Hold owners to dates. ", "Training and retirement land together."]
+    ],
+    "success": "SUCCESS = ONE TRUSTED CUSTOMER VIEW, AT SCALE",
+    "source": "Dates reflect the current plan.",
+    "notes": "Close on the ask: finish Phase 1 cleanly, then repeat."
+  },
+  "closer": {
+    "title": "SALES IS NEXT - AND THE MODEL SCALES",
+    "takeaway": "Prove it with support, repeat with sales, then extend to every team.",
+    "tiers": [
+      {"head": "PHASE 1  ·  SUPPORT", "when": "PROVEN THIS YEAR", "accent": "green", "body": "First team migrated, integrated, and stabilized."},
+      {"head": "PHASE 2  ·  SALES", "when": "NEXT QUARTER", "accent": "accent", "body": "The same cycle applied to sales."},
+      {"head": "PHASE 3+  ·  SCALE", "when": "NEXT YEAR", "accent": "primary", "body": "Success, partners, and more - one team at a time."}
+    ],
+    "banner": "One trusted source   ·   Standardize once   ·   Reuse everywhere",
+    "notes": "Leave the audience with one message: the value is the repeatable model."
+  }
+}
