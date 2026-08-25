@@ -1,0 +1,49 @@
+{
+  "_comment": "Weekly input for the WBR agent. Every section is optional. Anything you omit is carried forward unchanged from the prior week's deck. Dates accept ISO (2026-08-31) or M/D/YYYY (8/31/2026). Program keys must match the keys in wbr_config.json.",
+
+  "report_week": {"start": "2026-08-31", "end": "2026-09-04"},
+  "metrics_week": {"start": "2026-08-19", "end": "2026-08-26"},
+
+  "prior_deck": "",
+  "_prior_deck_note": "Leave blank to use baseline_deck from wbr_config.json, or set to a filename in deck_dir / an absolute path to roll a specific deck forward.",
+
+  "programs": {
+    "_comment": "Per program: set rag to one of ON TRACK / AT RISK / OFF TRACK / WATCH, and body to the full card text (use \\n between lines). Omit a field to keep last week's.",
+    "Program 1": {"rag": "AT RISK", "body": ""},
+    "Program 2": {"rag": "ON TRACK", "body": ""},
+    "Program 3": {"rag": "AT RISK", "body": ""},
+    "Program 4": {"rag": "ON TRACK", "body": ""}
+  },
+
+  "risks": {
+    "_comment": "Provide the COMPLETE risk register for slide 4 (trailing rows are cleared). Omit this section to keep last week's table. severity = H / M / L.",
+    "rows": []
+  },
+
+  "priorities": {
+    "_comment": "Slide 2 ranked list. Provide the full ordered list (trailing rows cleared). Omit to keep last week's.",
+    "items": []
+  },
+
+  "timeline": {
+    "_comment": "Slide 5. updated sets the 'Updated M/D/YYYY' stamp; phases optionally replace phase text by key.",
+    "updated": "2026-08-26",
+    "phases": {}
+  },
+
+  "reporting": {
+    "_comment": "Slide 8. exec_summary is the one-line summary; deliverables map name + body for the two columns. Use bold headers (Accomplishments, In Progress, Risks / Blockers, Next Steps) and 'Label: text' lines for emphasis.",
+    "exec_summary": "",
+    "deliverables": [
+      {"name": "", "body": ""},
+      {"name": "", "body": ""}
+    ]
+  },
+
+  "metrics": {
+    "_comment": "Slide 9 support metrics. Provide current + prior week values and an insights paragraph. Omit to keep last week's.",
+    "insights": "",
+    "current": {"created": "", "solved": "", "one_touch": "", "reopened": "", "csat": "", "sla": "", "extensions": ""},
+    "prior": {"created": "", "solved": "", "one_touch": "", "reopened": "", "csat": "", "sla": "", "extensions": ""}
+  }
+}

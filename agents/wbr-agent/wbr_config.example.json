@@ -1,0 +1,107 @@
+{
+  "_setup": [
+    "This config maps your PowerPoint template to the WBR engine by shape NAME.",
+    "1. Copy this file to wbr_config.json.",
+    "2. Set deck_dir to the folder holding your deck, and baseline_deck to the template filename.",
+    "3. Run: python inspect_deck.py \"<your deck>\" --out deck-structure.json",
+    "4. Update every *_shape / *_shapes / table shape name below to match deck-structure.json.",
+    "   Tip: give an LLM deck-structure.json plus this file and ask it to produce wbr_config.json.",
+    "5. output_pattern tokens: {start_month} {start_day} {end_month} {end_day} {end_label} {year}.",
+    "The values below are a working example for a common 11-slide status template; adjust to yours."
+  ],
+  "version": "1.0-generic",
+  "profile": "Generic WBR",
+  "deck_dir": "CHANGE_ME/path/to/deck/folder",
+  "baseline_deck": "CHANGE_ME_template.pptx",
+  "output_pattern": "Weekly Project Status_{start_month} {start_day}-{end_label}.pptx",
+
+  "subtitle": {"slide": 1, "shape": "Text Placeholder 7", "form": "week_of_long"},
+
+  "knowledge_base": {
+    "_note": "Optional. Point context_layer_path at an installed Project Context Layer agent folder (the one containing the context_layer package) to add a week-over-week change digest to the draft. Leave blank to run standalone.",
+    "context_layer_path": ""
+  },
+
+  "programs": [
+    {"key": "Program 1", "slide": 3, "name_shape": "Text 2", "rag_shape": "Text 4", "rag_fill_shape": "Shape 3", "body_shape": "Text 5"},
+    {"key": "Program 2", "slide": 3, "name_shape": "Text 7", "rag_shape": "Text 9", "rag_fill_shape": "Shape 8", "body_shape": "Text 10"},
+    {"key": "Program 3", "slide": 3, "name_shape": "Text 12", "rag_shape": "Text 14", "rag_fill_shape": "Shape 13", "body_shape": "Text 15"},
+    {"key": "Program 4", "slide": 3, "name_shape": "Text 17", "rag_shape": "Text 19", "rag_fill_shape": "Shape 18", "body_shape": "Text 20"}
+  ],
+
+  "risk_table": {
+    "slide": 4,
+    "shape": "Table 2",
+    "header_rows": 1,
+    "columns": ["severity", "workstream", "risk", "impact", "mitigation"]
+  },
+
+  "priorities_table": {
+    "slide": 2,
+    "shape": "Table 4",
+    "header_rows": 1,
+    "num_col": 0,
+    "text_col": 1,
+    "max_rows": 11
+  },
+
+  "reporting_slide": {
+    "slide": 8,
+    "exec_shape": "Rectangle 2",
+    "deliverables": [
+      {"name_shape": "Rounded Rectangle 6", "body_shape": "Rectangle 4"},
+      {"name_shape": "Rounded Rectangle 7", "body_shape": "Rectangle 5"}
+    ]
+  },
+
+  "timeline_slide": {
+    "slide": 5,
+    "updated_shape": "TextBox 2",
+    "phase_shapes": {
+      "phase1": "TextBox 19",
+      "phase2": "TextBox 21",
+      "phase3": "TextBox 23",
+      "phase4": "TextBox 25",
+      "track1": "TextBox 27",
+      "track2": "TextBox 29",
+      "track3": "TextBox 31",
+      "track4": "TextBox 33"
+    }
+  },
+
+  "metrics_slide": {
+    "slide": 9,
+    "title_shape": "Title 1",
+    "insights_shape": "TextBox 73",
+    "week_label_shape": "TextBox 25",
+    "current": {
+      "created": "TextBox 19",
+      "solved": "TextBox 20",
+      "one_touch": "TextBox 21",
+      "reopened": "TextBox 26",
+      "csat": "TextBox 28",
+      "sla": "TextBox 35",
+      "extensions": "TextBox 41"
+    },
+    "prior": {
+      "created": "TextBox 9",
+      "solved": "TextBox 7",
+      "one_touch": "TextBox 8",
+      "reopened": "TextBox 10",
+      "csat": "TextBox 12",
+      "sla": "TextBox 36",
+      "extensions": "TextBox 40"
+    }
+  },
+
+  "detail_titles": [
+    {"slide": 7, "shape": "Title 1", "prefix": "Workstream 1 status "},
+    {"slide": 8, "shape": "TextBox 1", "prefix": "Workstream 2 status "}
+  ],
+
+  "rag_values": ["ON TRACK", "AT RISK", "OFF TRACK", "WATCH"],
+  "rag_colors": {"ON TRACK": "42AB83", "AT RISK": "FAA700", "OFF TRACK": "E32551", "WATCH": "FAA700"},
+  "severity_colors": {"H": "E32551", "M": "FAA700", "L": "42AB83"},
+  "neutral_fill": "FFFFFF",
+  "leave_as_is_slides": [10, 11]
+}

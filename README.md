@@ -9,6 +9,7 @@ A collection of installable VS Code and GitHub Copilot agent packages for modern
 | RAID Review Agent | [`agents/raid-review-agent`](agents/raid-review-agent) | [releases](https://github.com/andymankansas/Andy_Modern_PMO_Control_Artifacts/releases?q=raid-review-agent) |
 | Meeting Monitor Agent | [`agents/meeting-monitor-agent`](agents/meeting-monitor-agent) | [releases](https://github.com/andymankansas/Andy_Modern_PMO_Control_Artifacts/releases?q=meeting-monitor-agent) |
 | Project Context Layer | [`agents/project-context-layer`](agents/project-context-layer) | [releases](https://github.com/andymankansas/Andy_Modern_PMO_Control_Artifacts/releases?q=project-context-layer) |
+| WBR Agent | [`agents/wbr-agent`](agents/wbr-agent) | [releases](https://github.com/andymankansas/Andy_Modern_PMO_Control_Artifacts/releases?q=wbr-agent) |
 
 ## Download and install
 

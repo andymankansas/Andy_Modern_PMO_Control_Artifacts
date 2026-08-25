@@ -1,0 +1,70 @@
+name: Validate WBR Agent
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "agents/wbr-agent/**"
+      - ".github/workflows/validate-wbr-agent.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "agents/wbr-agent/**"
+      - ".github/workflows/validate-wbr-agent.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: agents/wbr-agent
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate agent frontmatter
+        shell: pwsh
+        run: |
+          $agent = "wbr-agent.agent.md"
+          if (-not (Test-Path $agent)) { throw "Missing agent file: $agent" }
+          $text = Get-Content $agent -Raw
+          if ($text -notmatch "(?ms)^---\s.*\bname:\s*WBR Agent\b.*\bdescription:\s*.+?---") {
+            throw "Agent frontmatter is missing required name/description."
+          }
+          Write-Host "Frontmatter OK."
+
+      - name: Scan for personal or tenant data
+        shell: pwsh
+        run: |
+          $patterns = @("reply\.com","a[._]lees","v-anlees","b00367e2-193a-4f48-94de-7245d45c0947",[char]0x2014,[char]0x2013)
+          $hits = @()
+          Get-ChildItem -Recurse -File -Include *.md,*.ps1,*.json,*.py,*.txt |
+            ForEach-Object {
+              $content = Get-Content $_.FullName -Raw
+              foreach ($p in $patterns) {
+                if ($content -match $p) { $hits += "$($_.Name): /$p/" }
+              }
+            }
+          if ($hits) { $hits | ForEach-Object { Write-Error $_ }; throw "Forbidden content found." }
+          Write-Host "No personal or tenant data found."
+
+      - name: Smoke test the engine
+        shell: pwsh
+        run: |
+          python -m pip install --quiet -r requirements.txt
+          # Build a minimal deck, then prove inspect / draft / generate run end to end.
+          python -c "from pptx import Presentation; from pptx.util import Inches; p=Presentation(); s=p.slides.add_slide(p.slide_layouts[6]); tb=s.shapes.add_textbox(Inches(1),Inches(1),Inches(8),Inches(1)); tb.text_frame.text='Status Week of 8/24/2026 - 8/28/2026'; p.save('sample.pptx')"
+          if ($LASTEXITCODE -ne 0) { throw "sample deck build failed" }
+          python inspect_deck.py sample.pptx --out deck-structure.json
+          if ($LASTEXITCODE -ne 0) { throw "inspect_deck failed" }
+          python draft_wbr.py --help
+          if ($LASTEXITCODE -ne 0) { throw "draft_wbr --help failed" }
+          python generate_wbr.py --help
+          if ($LASTEXITCODE -ne 0) { throw "generate_wbr --help failed" }
+          Remove-Item sample.pptx, deck-structure.json -Force -ErrorAction SilentlyContinue
+          Write-Host "Smoke test OK."

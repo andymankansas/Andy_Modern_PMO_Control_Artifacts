@@ -1,0 +1,2 @@
+# python-pptx reads and writes .pptx decks. Standard library covers the rest.
+python-pptx>=1.0.0

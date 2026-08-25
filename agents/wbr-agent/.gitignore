@@ -1,0 +1,9 @@
+# Never commit your deck, your config, or generated output.
+wbr_config.json
+weekly_input.json
+drafts/
+deck-structure.json
+*.pptx
+*.validation.md
+__pycache__/
+*.pyc
