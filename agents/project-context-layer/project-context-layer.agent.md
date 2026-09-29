@@ -63,20 +63,24 @@ Copy `context_layer/config.example.json` to `context_layer/config.json` and edit
 
 ## Stage 1: Ingestion (optional)
 
-Once per day (or on demand), for each configured workstream:
+Stage 2 only needs a folder of notes in the expected format (see "Note format" and the
+samples). The preferred way to produce that folder is the companion **Meeting Monitor
+Agent**, used as your ingestion engine of record. It is the more complete collector (setup
+wizard, multi-workstream fan-out, fallback folders, untracked-meeting discovery, and a deep
+fallback chain for missing recaps), and it already writes the same
+`<Name>__<YYYY-MM-DD>__<Workstream>.md` convention and section headings Stage 2 parses. Point
+its destination folder at this agent's `artifacts_dirs`, then run Stage 2 in `index-only` mode
+and the notes drop straight in.
 
-1. Determine the time window since the last run.
-2. For each tracked meeting that completed, gather the fullest record available
-   (recap, notes, transcript, recording link, minutes email) via WorkIQ and write a
-   `.md` (and optionally `.docx`) note into the workstream folder.
-3. Sweep email and chat for messages matching `seed_terms`, writing one digest per source.
-4. Write notes using the templates in `context_layer/samples/` so Stage 2 can parse them.
+Already have a notes folder (from the Meeting Monitor Agent or any other source)? Skip
+ingestion entirely with `index-only`.
 
-Ingestion is intentionally described at a high level here: adapt the tracked-meeting list,
-seed terms, and folders to your project via `config.json`. The note **format** is what
-matters to Stage 2, keep the section headings shown in the samples.
-
-If you already have a notes folder, skip this stage entirely (`index-only`).
+No separate collector? This agent can also capture as a minimal fallback. Once per day, for
+each configured workstream: determine the window since the last run, gather the fullest record
+available per tracked meeting (recap, notes, transcript, recording link, minutes email) via
+WorkIQ, sweep email and chat for `seed_terms`, and write notes from the
+`context_layer/samples/` templates. Keep the sample section headings, that format is what
+Stage 2 parses. Prefer the Meeting Monitor Agent for robust, ongoing capture.
 
 ---
 
@@ -131,4 +135,4 @@ python reports\weekly_report.py
 ```
 
 Point `artifacts_dirs` at `samples/` first to see it work end to end, then swap in your
-real notes folder (or wire up Stage 1).
+real notes folder (from the Meeting Monitor Agent or your own) and run `index-only`.

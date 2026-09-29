@@ -2,6 +2,21 @@
 
 A self-configuring GitHub Copilot Chat agent that gathers your meeting notes (Copilot recap, AI notes, transcript highlights), sweeps your Outlook email, and sweeps your Teams chats for your project keywords, then saves everything as .docx and .md files in folders you choose. You do not edit any code. On first use it runs a short setup wizard; after that, one command captures the day.
 
+## Part of a two-step pipeline (this is step 1)
+
+This agent is the **capture** step, and it is meant to be set up first. Its notes are designed
+to feed a second agent, the **Project Context Layer**, which indexes them into a queryable
+knowledge base (entities, lineage, quality, weekly rollups) that reports and other agents build on.
+
+- **Step 1 (this agent):** set it up first and let it capture meetings, email, and Teams into a
+  notes folder.
+- **Step 2 (Project Context Layer, optional):** point it at this agent's destination folder and
+  run it in `index-only` mode. Both share the same `<Name>__<YYYY-MM-DD>__<Workstream>.md`
+  filename and section-heading convention, so the handoff is clean.
+
+You can use this agent entirely on its own. Add the Context Layer later if you want a durable
+source of truth on top of the captured notes.
+
 ## What is in this package
 
 - `.github/agents/meeting-monitor.agent.md` - the agent. This is the only file you install.
