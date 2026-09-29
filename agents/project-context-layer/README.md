@@ -13,15 +13,43 @@ from your everyday project signals.
  (needs WorkIQ / M365)                 (plain Python, any notes folder)
 ```
 
+## Works with the Meeting Monitor Agent (set that up first)
+
+These two agents are designed as a pipeline: the **Meeting Monitor Agent** captures, this
+agent makes sense of what was captured.
+
+```
+ Meeting Monitor Agent            Project Context Layer
+ capture meetings/email/chat  ->  index -> queryable store -> reports
+ (writes .md + .docx notes)       (entities, lineage, quality, rollups)
+```
+
+Recommended setup order:
+
+1. **Download and set up the Meeting Monitor Agent first.** Run its setup wizard and choose a
+   destination folder for its notes. Let it run at least once so real notes exist.
+2. **Point this agent at that same folder.** Set `artifacts_dirs` in `config.json` to the
+   Meeting Monitor's destination folder.
+3. **Run this agent in `index-only` mode.** It indexes the notes into the knowledge base and
+   builds rollups and reports. No re-capture needed.
+
+They interoperate cleanly because both use the same note filename convention
+(`<Name>__<YYYY-MM-DD>__<Workstream>.md`) and section headings. You can still run this agent
+standalone on any existing notes folder, the Meeting Monitor Agent simply gives you the most
+complete, self-configuring capture.
+
 ## Why two stages, one agent
 
 - **Ingestion** gathers meetings, email, and chat into organized note files. It needs
-  WorkIQ / Microsoft 365 access.
+  WorkIQ / Microsoft 365 access. This built-in path is deliberately minimal. For robust,
+  ongoing capture, use the companion **Meeting Monitor Agent** as your ingestion engine of
+  record (see "Works with the Meeting Monitor Agent" above).
 - **Knowledge Base** indexes those notes into a linked, self-checking store and serves it as
   a project source of truth. It is plain Python over a folder, no network, and works on its own.
 
-If you have M365, run both. If you only have a folder of notes (from this agent or anything
-else), skip Stage 1 and just run Stage 2.
+If you already have a notes folder (from the Meeting Monitor Agent or anything else), skip
+Stage 1 and just run Stage 2 in `index-only` mode. If you have M365 and no separate collector,
+you can run both.
 
 ## What it does (six capabilities)
 
@@ -40,6 +68,8 @@ else), skip Stage 1 and just run Stage 2.
 
 - Python 3.10+ (the knowledge base uses only the standard library).
 - `python-docx` only if you generate `.docx` notes in Stage 1 (`pip install -r requirements.txt`).
+- Recommended: the companion **Meeting Monitor Agent**, set up first, as the capture front end
+  that feeds this agent's notes folder. Optional if you already have a notes folder.
 
 ## Quick start (no M365 needed)
 
